@@ -1,1 +1,155 @@
-<>
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | E-Raport Fleksibel</title>
+    <style>
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            height: 100vh; 
+            background-color: #f0f2f5; 
+            margin: 0;
+        }
+        .login-box { 
+            background: white; 
+            padding: 2.5rem; 
+            border-radius: 10px; 
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1); 
+            width: 100%;
+            max-width: 320px; 
+        }
+        .login-box h2 {
+            margin-top: 0;
+            text-align: center;
+            color: #333;
+        }
+        .form-group { margin-bottom: 1.2rem; }
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #555;
+            font-size: 14px;
+        }
+        .form-group input { 
+            width: 100%; 
+            padding: 10px; 
+            box-sizing: border-box; 
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+        button { 
+            width: 100%; 
+            padding: 12px; 
+            background-color: #0056b3; 
+            color: white; 
+            border: none; 
+            border-radius: 5px; 
+            font-size: 16px;
+            cursor: pointer; 
+            transition: background 0.3s;
+        }
+        button:hover { background-color: #004494; }
+        #error-msg { 
+            color: #dc3545; 
+            display: none; 
+            margin-bottom: 15px; 
+            font-size: 13px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="login-box">
+        <h2>E-Raport</h2>
+        <div id="error-msg">Username atau password salah!</div>
+        
+        <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" id="username" placeholder="Masukkan username" required autocomplete="off">
+        </div>
+        
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" placeholder="Masukkan password" required>
+        </div>
+        
+        <button id="login-btn">Masuk</button>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getFirestore, collection, query, where, getDocs } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+        // Konfigurasi Firebase
+        const firebaseConfig = {
+            apiKey: "AIzaSyCBXA1Atpm8LpDSdAr02OEvuADP2bUT9Gk",
+            authDomain: "eraport-87687.firebaseapp.com",
+            projectId: "eraport-87687",
+            storageBucket: "eraport-87687.firebasestorage.app",
+            messagingSenderId: "879847959076",
+            appId: "1:879847959076:web:51ca5db07bb4724b7e06b1",
+            measurementId: "G-NWCTMGHZEV"
+        };
+
+        // Inisialisasi Firebase & Firestore
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        // Logika Login
+        document.getElementById('login-btn').addEventListener('click', async () => {
+            const userVal = document.getElementById('username').value.trim();
+            const passVal = document.getElementById('password').value.trim();
+            const errorMsg = document.getElementById('error-msg');
+            const loginBtn = document.getElementById('login-btn');
+            
+            if(!userVal || !passVal) {
+                alert("Harap isi username dan password!");
+                return;
+            }
+
+            loginBtn.textContent = "Memeriksa...";
+            loginBtn.disabled = true;
+
+            try {
+                // Mencari dokumen di collection 'users' yang cocok
+                const usersRef = collection(db, "users");
+                const q = query(usersRef, where("username", "==", userVal), where("password", "==", passVal));
+                const querySnapshot = await getDocs(q);
+
+                if (!querySnapshot.empty) {
+                    // Berhasil Login
+                    let userData = null;
+                    querySnapshot.forEach((doc) => {
+                        userData = doc.data(); // Ambil role dsb
+                    });
+
+                    alert(`Selamat datang, ${userData.role}!`);
+                    
+                    // Simpan state login di Session Storage agar tidak hilang saat di-refresh
+                    sessionStorage.setItem("isLoggedIn", "true");
+                    sessionStorage.setItem("role", userData.role);
+                    
+                    // Redirect ke halaman dashboard (buat file dashboard.html nantinya)
+                    // window.location.href = "dashboard.html"; 
+                    
+                } else {
+                    // Gagal Login
+                    errorMsg.style.display = "block";
+                }
+            } catch (error) {
+                console.error("Error koneksi ke Firestore: ", error);
+                alert("Terjadi masalah koneksi ke server. Cek console log.");
+            } finally {
+                loginBtn.textContent = "Masuk";
+                loginBtn.disabled = false;
+            }
+        });
+    </script>
+</body>
+</html>
