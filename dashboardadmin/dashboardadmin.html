@@ -3,57 +3,101 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard Admin | E-Raport Profesional</title>
+    <title>Dashboard Admin | E-Raport Modern</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
     <style>
-        /* Reset & Variabel Dasar */
+        /* Reset & Variabel Sistem */
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+        }
+
+        :root {
+            --primary: #2563eb;
+            --primary-light: #eff6ff;
+            --sidebar-bg: #0f172a;
+            --sidebar-hover: #1e293b;
+            --sidebar-text: #94a3b8;
+            --bg-main: #f8fafc;
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --border: #e2e8f0;
+            --success: #10b981;
+            --radius-lg: 12px;
+            --radius-md: 8px;
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
         }
 
         body {
             display: flex;
             height: 100vh;
             overflow: hidden;
-            background-color: #f8fafc;
-            color: #334155;
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            -webkit-font-smoothing: antialiased;
         }
 
-        /* --- SIDEBAR DI SISI KIRI --- */
+        /* --- SIDEBAR KIRI --- */
         .sidebar {
             width: 280px;
-            background-color: #0f172a;
-            color: #f8fafc;
+            background-color: var(--sidebar-bg);
+            color: #ffffff;
             display: flex;
             flex-direction: column;
-            padding: 2rem 1rem;
+            padding: 2rem 1.25rem;
             flex-shrink: 0;
+            border-right: 1px solid rgba(255, 255, 255, 0.05);
         }
 
         .sidebar-brand {
             display: flex;
             align-items: center;
             gap: 12px;
-            font-size: 1.4rem;
-            font-weight: 700;
-            color: #ffffff;
+            padding: 0.5rem;
             margin-bottom: 2.5rem;
-            padding-left: 0.5rem;
         }
 
-        .sidebar-brand svg {
-            width: 28px;
-            height: 28px;
-            color: #3b82f6;
+        .sidebar-brand-logo {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffffff;
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+        }
+
+        .sidebar-brand-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .sidebar-brand-text .title {
+            font-size: 1.15rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            color: #ffffff;
+        }
+
+        .sidebar-brand-text .subtitle {
+            font-size: 0.75rem;
+            color: var(--sidebar-text);
+            font-weight: 500;
         }
 
         .sidebar-menu {
             list-style: none;
             display: flex;
             flex-direction: column;
-            gap: 0.5rem;
+            gap: 0.35rem;
             flex-grow: 1;
         }
 
@@ -61,56 +105,64 @@
             display: flex;
             align-items: center;
             gap: 12px;
-            padding: 0.85rem 1rem;
-            border-radius: 10px;
-            color: #94a3b8;
+            padding: 0.8rem 1rem;
+            border-radius: var(--radius-md);
+            color: var(--sidebar-text);
             text-decoration: none;
             cursor: pointer;
             font-weight: 500;
-            font-size: 0.95rem;
+            font-size: 0.925rem;
             transition: all 0.2s ease;
         }
 
         .menu-item:hover {
-            background-color: #1e293b;
-            color: #f8fafc;
+            background-color: var(--sidebar-hover);
+            color: #ffffff;
         }
 
         .menu-item.active {
-            background-color: #1e293b;
+            background-color: var(--sidebar-hover);
             color: #3b82f6;
             font-weight: 600;
             border-left: 4px solid #3b82f6;
-            border-radius: 4px 10px 10px 4px;
+            border-radius: 4px var(--radius-md) var(--radius-md) 4px;
         }
 
         .menu-item svg {
-            width: 20px;
-            height: 20px;
+            width: 22px;
+            height: 22px;
             flex-shrink: 0;
+            transition: transform 0.2s ease;
+        }
+
+        .menu-item:hover svg {
+            transform: translateX(2px);
         }
 
         .logout-btn {
-            background-color: #ef4444;
-            color: white;
-            border: none;
-            padding: 0.85rem 1rem;
-            border-radius: 10px;
+            background-color: rgba(239, 68, 68, 0.1);
+            color: #f87171;
+            border: 1px solid rgba(239, 68, 68, 0.2);
+            padding: 0.8rem 1rem;
+            border-radius: var(--radius-md);
             cursor: pointer;
             font-weight: 600;
-            font-size: 0.95rem;
+            font-size: 0.925rem;
             display: flex;
             align-items: center;
             gap: 12px;
-            transition: background 0.2s ease;
+            transition: all 0.2s ease;
             margin-top: auto;
         }
 
         .logout-btn:hover {
-            background-color: #dc2626;
+            background-color: #ef4444;
+            color: #ffffff;
+            border-color: #ef4444;
+            box-shadow: 0 4px 12px rgba(239, 68, 68, 0.2);
         }
 
-        /* --- KONTEN UTAMA DI SISI KANAN --- */
+        /* --- KONTEN UTAMA KANAN --- */
         .main-container {
             flex: 1;
             display: flex;
@@ -118,79 +170,197 @@
             overflow-y: auto;
         }
 
-        /* Top Header Nav bar */
+        /* Top Navbar */
         .header {
             background-color: #ffffff;
             padding: 1.25rem 2.5rem;
-            border-bottom: 1px solid #e2e8f0;
+            border-bottom: 1px solid var(--border);
             display: flex;
             justify-content: space-between;
             align-items: center;
             flex-shrink: 0;
+            position: sticky;
+            top: 0;
+            z-index: 10;
         }
 
         .current-title {
             font-size: 1.25rem;
             font-weight: 700;
-            color: #0f172a;
+            color: var(--text-main);
+            letter-spacing: -0.5px;
         }
 
         .user-profile {
             display: flex;
             align-items: center;
-            gap: 10px;
-            font-size: 0.9rem;
-            color: #64748b;
+            gap: 12px;
+        }
+
+        .avatar-placeholder {
+            width: 36px;
+            height: 36px;
+            background-color: var(--primary-light);
+            color: var(--primary);
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            font-size: 0.875rem;
+            border: 1px solid var(--border);
+        }
+
+        .user-info-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .user-info-text .name {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--text-main);
         }
 
         .user-badge {
-            background-color: #e0f2fe;
-            color: #0369a1;
-            padding: 4px 10px;
-            border-radius: 20px;
+            align-self: flex-start;
+            background-color: #f0fdf4;
+            color: var(--success);
+            padding: 2px 8px;
+            border-radius: 12px;
             font-weight: 600;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
+            margin-top: 1px;
         }
 
-        /* SPA Konten Manajemen */
+        /* SPA Layout Konten */
         .content-section {
             padding: 2.5rem;
             display: none;
-            animation: slideUpFade 0.3s ease-out;
+            animation: slideUpFade 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         .content-section.active {
             display: block;
         }
 
-        /* UI Elemen / Tampilan Card */
         .page-header {
-            margin-bottom: 1.75rem;
+            margin-bottom: 2rem;
         }
 
         .page-header h1 {
             font-size: 1.75rem;
             font-weight: 700;
-            color: #0f172a;
-            margin-bottom: 4px;
+            color: var(--text-main);
+            letter-spacing: -0.5px;
+            margin-bottom: 6px;
         }
 
         .page-header p {
             font-size: 0.95rem;
-            color: #64748b;
+            color: var(--text-muted);
+        }
+
+        /* UI Cards Grid & Stats */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: #ffffff;
+            padding: 1.5rem;
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-sm);
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .stat-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .stat-info .value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-main);
+        }
+
+        .stat-info .label {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            font-weight: 500;
         }
 
         .card {
             background: #ffffff;
             padding: 2rem;
-            border-radius: 12px;
-            border: 1px solid #e2e8f0;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-sm);
         }
 
-        /* Animasi Transisi Halaman */
+        /* Desain Tabel Data Profesional */
+        .table-responsive {
+            width: 100%;
+            overflow-x: auto;
+            margin-top: 1rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            font-size: 0.9rem;
+        }
+
+        th {
+            background-color: var(--bg-main);
+            color: var(--text-muted);
+            padding: 0.85rem 1rem;
+            font-weight: 600;
+            border-bottom: 1px solid var(--border);
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 0.5px;
+        }
+
+        td {
+            padding: 1rem;
+            border-bottom: 1px solid var(--border);
+            color: #334155;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        tr:hover td {
+            background-color: var(--primary-light);
+        }
+
+        .badge-table {
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-size: 0.775rem;
+            font-weight: 600;
+        }
+
+        .badge-a { background-color: #eff6ff; color: #1d4ed8; }
+        .badge-b { background-color: #fdf2f8; color: #be185d; }
+
+        /* Animasi */
         @keyframes slideUpFade {
-            from { opacity: 0; transform: translateY(8px); }
+            from { opacity: 0; transform: translateY(12px); }
             to { opacity: 1; transform: translateY(0); }
         }
     </style>
@@ -199,39 +369,44 @@
 
     <div class="sidebar">
         <div class="sidebar-brand">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M4.263 15.518a5.978 5.978 0 013.003-7.583m11.468 0a5.978 5.978 0 013.003 7.583M11.208 8.25L12 3.75l.792 4.5M12 18.75a2.25 2.25 0 100-4.5 2.25 2.25 0 000 4.5z" />
-            </svg>
-            <span>E-Raport Admin</span>
+            <div class="sidebar-brand-logo">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" style="width: 24px; height: 24px;">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z" />
+                </svg>
+            </div>
+            <div class="sidebar-brand-text">
+                <span class="title">E-Raport Hub</span>
+                <span class="subtitle">Sistem Penilaian Fleksibel</span>
+            </div>
         </div>
         
         <ul class="sidebar-menu">
             <li class="menu-item active" data-target="beranda">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21.75h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21.875V16.5H15.75v5.375" />
                 </svg>
                 Beranda
             </li>
             <li class="menu-item" data-target="profil">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9s2.015-9 4.5-9m0 0a3.375 3.375 0 100 6.75 3.375 3.375 0 000-6.75z" />
                 </svg>
                 Profil Sekolah
             </li>
             <li class="menu-item" data-target="data-guru">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M4.26 10.174c-.04-.49-.06-.983-.06-1.482 0-3.328 1.92-6.2 4.7-7.548a.75.75 0 011.048.662c0 .407-.026.809-.077 1.204a3.75 3.75 0 005.122 4.192c.313-.131.644-.236.987-.313a.75.75 0 01.932.743c-.006.273-.017.545-.034.814a6.2 6.2 0 01-2.902 4.675M4.26 10.174a6.19 6.19 0 002.932 4.697m-2.933-4.697a7.481 7.481 0 01-1.218-.396.75.75 0 00-1.023.666A12.016 12.016 0 004.09 19.38a.75.75 0 00.723.616h4.5a.75.75 0 00.723-.616 12.022 12.022 0 00-.776-4.512M7.192 14.871A6.241 6.241 0 0112 13.5c1.942 0 3.73.882 4.918 2.412m-9.726-1.041a7.485 7.485 0 00-1.018.396m10.744-1.437a7.485 7.485 0 011.018.396m0 0a6.19 6.19 0 012.932 4.697m-2.932-4.697a7.481 7.481 0 001.218-.396.75.75 0 011.023.666A12.016 12.016 0 0119.91 19.38a.75.75 0 01-.723.616h-4.5a.75.75 0 01-.723-.616 12.022 12.022 0 01.776-4.512" />
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z" />
                 </svg>
                 Data Guru
             </li>
             <li class="menu-item" data-target="data-siswa">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-2.533-3.326 10.56 10.56 0 00-3.436-.572H14H15zM9 11a4 4 0 100-8 4 4 0 000 8zm0 2a6 6 0 00-6 6v.75c0 .414.336.75.75.75h12.5a.75.75 0 00.75-.75V19a6 6 0 00-6-6H9z" />
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M4.26 10.174c-.04-.49-.06-.983-.06-1.482 0-3.328 1.92-6.2 4.7-7.548a.75.75 0 011.048.662c0 .407-.026.809-.077 1.204a3.75 3.75 0 005.122 4.192c.313-.131.644-.236.987-.313a.75.75 0 01.932.743c-.006.273-.017.545-.034.814a6.2 6.2 0 01-2.902 4.675M4.26 10.174a6.19 6.19 0 002.932 4.697m-2.933-4.697a7.481 7.481 0 01-1.218-.396.75.75 0 00-1.023.666A12.016 12.016 0 004.09 19.38a.75.75 0 00.723.616h4.5a.75.75 0 00.723-.616 12.022 12.022 0 00-.776-4.512M7.192 14.871A6.241 6.241 0 0112 13.5c1.942 0 3.73.882 4.918 2.412m-9.726-1.041a7.485 7.485 0 00-1.018.396m10.744-1.437a7.485 7.485 0 011.018.396m0 0a6.19 6.19 0 012.932 4.697m-2.932-4.697a7.481 7.481 0 001.218-.396.75.75 0 011.023.666A12.016 12.016 0 0119.91 19.38a.75.75 0 01-.723.616h-4.5a.75.75 0 01-.723-.616 12.022 12.022 0 01.776-4.512" />
                 </svg>
                 Data Siswa
             </li>
             <li class="menu-item" data-target="mata-pelajaran">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" />
                 </svg>
                 Mata Pelajaran
@@ -239,7 +414,7 @@
         </ul>
 
         <button class="logout-btn" id="btn-logout">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" style="width: 20px; height: 20px;">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M19.5 12l-3-3m3 3l-3 3m3-3H9" />
             </svg>
             Keluar Aplikasi
@@ -250,113 +425,202 @@
         <div class="header">
             <div class="current-title" id="page-header-title">Beranda</div>
             <div class="user-profile">
-                <span id="user-display-role">Admin</span>
-                <span class="user-badge">Super User</span>
+                <div class="avatar-placeholder" id="avatar-letter">A</div>
+                <div class="user-info-text">
+                    <span class="name" id="user-display-role">ADMINISTRATOR</span>
+                    <span class="user-badge">Super Admin</span>
+                </div>
             </div>
         </div>
 
         <div id="beranda" class="content-section active">
             <div class="page-header">
-                <h1>Beranda Utama</h1>
-                <p>Ringkasan informasi dan pintasan sistem E-Raport.</p>
+                <h1>Selamat Datang di E-Raport Hub</h1>
+                <p>Ringkasan analitik dan pusat manajemen data instansi sekolah.</p>
             </div>
+            
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon" style="background-color: #eff6ff; color: #2563eb;">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" style="width:24px;height:24px;"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" /></svg>
+                    </div>
+                    <div class="stat-info">
+                        <div class="value">32</div>
+                        <div class="label">Total Guru</div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon" style="background-color: #f0fdf4; color: #10b981;">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" style="width:24px;height:24px;"><path stroke-linecap="round" stroke-linejoin="round" d="M4.26 10.174c-.04-.49-.06-.983-.06-1.482 0-3.328 1.92-6.2 4.7-7.548a.75.75 0 011.048.662c0 .407-.026.809-.077 1.204a3.75 3.75 0 005.122 4.192c.313-.131.644-.236.987-.313a.75.75 0 01.932.743c-.006.273-.017.545-.034.814a6.2 6.2 0 01-2.902 4.675" /></svg>
+                    </div>
+                    <div class="stat-info">
+                        <div class="value">480</div>
+                        <div class="label">Total Siswa</div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon" style="background-color: #fdf2f8; color: #db2777;">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" style="width:24px;height:24px;"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" /></svg>
+                    </div>
+                    <div class="stat-info">
+                        <div class="value">14</div>
+                        <div class="label">Mata Pelajaran</div>
+                    </div>
+                </div>
+            </div>
+
             <div class="card">
-                <h3>Selamat Datang kembali di Dashboard Admin</h3>
-                <p style="margin-top: 10px; color: #64748b;">Gunakan panel menu di sebelah kiri untuk mengonfigurasi dan mengelola data sekolah, kurikulum, serta komponen penugasan akademik secara real-time.</p>
+                <h3 style="margin-bottom: 8px;">Informasi Sistem</h3>
+                <p style="color: var(--text-muted); margin: 0;">Gunakan navigasi menu di sebelah kiri untuk mengonfigurasi pengaturan kurikulum dan penginputan nilai rapot secara dinamis berbasis cloud Firestore.</p>
             </div>
         </div>
 
         <div id="profil" class="content-section">
             <div class="page-header">
-                <h1>Profil Lembaga Sekolah</h1>
-                <p>Kelola identitas utama sekolah dan data administrasi dasar.</p>
+                <h1>Profil Lembaga Instansi</h1>
+                <p>Identitas dasar sekolah untuk pencetakan dokumen kover rapot.</p>
             </div>
             <div class="card">
-                <h3>Identitas Sekolah</h3>
-                <p style="margin-top: 10px; color: #64748b;">Halaman konfigurasi untuk NPSN, Alamat Instansi, Akreditasi, dan Data Kepala Sekolah.</p>
+                <h3 style="margin-bottom: 12px;">Data Utama Lembaga</h3>
+                <p style="color: var(--text-muted);">Halaman konfigurasi NPSN, Nama Instansi, Kebijakan Kurikulum (Merdeka/K13), serta nama Kepala Sekolah yang akan dihubungkan ke dokumen database.</p>
             </div>
         </div>
 
         <div id="data-guru" class="content-section">
             <div class="page-header">
                 <h1>Manajemen Data Guru</h1>
-                <p>Kelola data pendidik, pembuatan akun, dan delegasi hak akses wali kelas.</p>
+                <p>Kelola data otentikasi tenaga pendidik dan pembagian tugas wali kelas.</p>
             </div>
             <div class="card">
-                <h3>Daftar Tenaga Pendidik</h3>
-                <p style="margin-top: 10px; color: #64748b;">Komponen manipulasi data guru yang akan dihubungkan ke Firestore.</p>
+                <h3 style="margin-bottom: 12px;">Direktori Tenaga Pendidik</h3>
+                <p style="color: var(--text-muted); margin-bottom: 1.5rem;">Daftar guru aktif di database Firestore.</p>
+                <div class="table-responsive">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>NIP / Kode</th>
+                                <th>Nama Guru</th>
+                                <th>Status Jabatan</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>198503112010011002</td>
+                                <td>Budi Santoso, S.Pd.</td>
+                                <td>Wali Kelas 6A</td>
+                            </tr>
+                            <tr>
+                                <td>199107232015042003</td>
+                                <td>Siti Aminah, M.Pd.</td>
+                                <td>Guru Mapel / Admin</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
 
         <div id="data-siswa" class="content-section">
             <div class="page-header">
                 <h1>Manajemen Data Siswa</h1>
-                <p>Atur data murid, rombongan belajar (rombel), dan riwayat naik kelas.</p>
+                <p>Kelola data peserta didik, NISN, serta manajemen rombongan belajar (rombel).</p>
             </div>
             <div class="card">
-                <h3>Daftar Peserta Didik</h3>
-                <p style="margin-top: 10px; color: #64748b;">Gunakan bagian ini untuk memproses rombel kelas dan mengelola NISN siswa.</p>
+                <h3 style="margin-bottom: 12px;">Daftar Murid Aktif</h3>
+                <p style="color: var(--text-muted);">Gunakan panel ini untuk mengunggah data siswa baru atau memetakan rombel kelas per tahun ajaran.</p>
             </div>
         </div>
 
         <div id="mata-pelajaran" class="content-section">
             <div class="page-header">
                 <h1>Manajemen Mata Pelajaran</h1>
-                <p>Atur struktur mata pelajaran kelompok wajib, pilihan, muatan lokal, dan KKM.</p>
+                <p>Konfigurasi daftar mata pelajaran, pembagian kelompok kurikulum, dan KKM.</p>
             </div>
             <div class="card">
-                <h3>Daftar Mata Pelajaran / Kurikulum</h3>
-                <p style="margin-top: 10px; color: #64748b;">Halaman ini digunakan untuk menarik, mengubah, dan menambah koleksi mata pelajaran (subjects) secara dinamis langsung dari basis data Firestore.</p>
+                <h3 style="margin-bottom: 12px;">Struktur Kurikulum Instansi</h3>
+                <p style="color: var(--text-muted); margin-bottom: 1.5rem;">Data di bawah ini dikelola secara dinamis dari koleksi <code>subjects</code> pada Firestore.</p>
+                
+                <div class="table-responsive">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Kode Mapel</th>
+                                <th>Nama Mata Pelajaran</th>
+                                <th>Kelompok</th>
+                                <th>KKM / Nilai Batas</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>MAPEL-MAT</code></td>
+                                <td>Matematika</td>
+                                <td><span class="badge-table badge-a">Kelompok A (Wajib)</span></td>
+                                <td><strong>75</strong></td>
+                            </tr>
+                            <tr>
+                                <td><code>MAPEL-BIN</code></td>
+                                <td>Bahasa Indonesia</td>
+                                <td><span class="badge-table badge-a">Kelompok A (Wajib)</span></td>
+                                <td><strong>70</strong></td>
+                            </tr>
+                            <tr>
+                                <td><code>MAPEL-ING</code></td>
+                                <td>Bahasa Inggris</td>
+                                <td><span class="badge-table badge-b">Muatan Lokal</span></td>
+                                <td><strong>75</strong></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
 
     </div>
 
     <script type="module">
-        // Proteksi Halaman: Cek status login sebelum parsing DOM
+        // --- PROTEKSI SESSION HALAMAN ---
         if (sessionStorage.getItem("isLoggedIn") !== "true") {
-            alert("Sesi berakhir atau Anda belum login. Dialihkan ke halaman utama.");
+            alert("Akses ditolak! Sesi berakhir atau Anda belum login.");
             window.location.href = "../index.html"; 
         }
 
-        // Tampilkan Peran dari Session Storage ke Header
-        const storedRole = sessionStorage.getItem("role");
-        if (storedRole) {
-            document.getElementById("user-display-role").textContent = storedRole.toUpperCase();
-        }
+        // --- AMBIL & SET INFORMASI ROLE USER ---
+        const storedRole = sessionStorage.getItem("role") || "Admin";
+        document.getElementById("user-display-role").textContent = storedRole.toUpperCase();
+        // Ambil huruf pertama role untuk avatar lingkaran di pojok kanan atas
+        document.getElementById("avatar-letter").textContent = storedRole.charAt(0).toUpperCase();
 
-        // Ambil Node Elemen Navigasi
+        // --- SISTEM TOGGLE NAVIGATION SPA ---
         const menuItems = document.querySelectorAll(".menu-item");
         const sections = document.querySelectorAll(".content-section");
         const pageHeaderTitle = document.getElementById("page-header-title");
 
-        // Logika Toggling Tampilan SPA 
         menuItems.forEach(item => {
             item.addEventListener("click", () => {
-                // 1. Matikan class active yang sedang berjalan pada menu & konten
+                // 1. Bersihkan status aktif lama
                 menuItems.forEach(menu => menu.classList.remove("active"));
                 sections.forEach(section => section.classList.remove("active"));
 
-                // 2. Aktifkan menu yang baru saja diklik
+                // 2. Aktifkan menu yang dipilih
                 item.classList.add("active");
                 
-                // 3. Tampilkan target section konten berdasarkan atribut data-target
+                // 3. Tampilkan section target berdasarkan atribut data-target
                 const targetId = item.getAttribute("data-target");
                 const targetSection = document.getElementById(targetId);
                 if (targetSection) {
                     targetSection.classList.add("active");
                 }
 
-                // 4. Update teks judul pada bar atas header
+                // 4. Perbarui judul di top navbar
                 pageHeaderTitle.textContent = item.textContent.trim();
             });
         });
 
-        // Logika Tombol Keluar / Sign Out
+        // --- LOGIKA SIGN OUT ---
         document.getElementById("btn-logout").addEventListener("click", () => {
             if (confirm("Apakah Anda yakin ingin keluar dari sistem?")) {
-                sessionStorage.clear(); // Hapus semua token kredensial sementara
-                window.location.href = "../index.html"; // Redirect ke form login
+                sessionStorage.clear();
+                window.location.href = "../index.html";
             }
         });
     </script>
