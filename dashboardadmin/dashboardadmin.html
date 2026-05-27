@@ -27,11 +27,9 @@
             --text-main: #0f172a;
             --text-muted: #64748b;
             --border: #e2e8f0;
-            --success: #10b981;
             --radius-lg: 12px;
             --radius-md: 8px;
             --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
         }
 
         body {
@@ -45,7 +43,7 @@
 
         /* --- SIDEBAR KIRI --- */
         .sidebar {
-            width: 280px;
+            width: 260px;
             background-color: var(--sidebar-bg);
             color: #ffffff;
             display: flex;
@@ -56,101 +54,73 @@
         }
 
         .sidebar-brand {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 0.5rem;
-            margin-bottom: 2.5rem;
+            margin-bottom: 3rem;
+            padding-left: 0.75rem;
         }
 
-        .sidebar-brand-logo {
-            width: 40px;
-            height: 40px;
-            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
-            border-radius: var(--radius-md);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #ffffff;
-            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
-        }
-
-        .sidebar-brand-text {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .sidebar-brand-text .title {
-            font-size: 1.15rem;
+        .sidebar-brand .title {
+            font-size: 1.25rem;
             font-weight: 700;
             letter-spacing: -0.5px;
             color: #ffffff;
+            display: block;
         }
 
-        .sidebar-brand-text .subtitle {
+        .sidebar-brand .subtitle {
             font-size: 0.75rem;
-            color: var(--sidebar-text);
-            font-weight: 500;
+            color: var(--primary);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 4px;
+            display: block;
         }
 
         .sidebar-menu {
             list-style: none;
             display: flex;
             flex-direction: column;
-            gap: 0.35rem;
+            gap: 0.25rem;
             flex-grow: 1;
         }
 
+        /* Perbaikan Menu Tanpa Ikon */
         .menu-item {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 0.8rem 1rem;
+            display: block;
+            padding: 0.85rem 1rem;
             border-radius: var(--radius-md);
             color: var(--sidebar-text);
             text-decoration: none;
             cursor: pointer;
             font-weight: 500;
-            font-size: 0.925rem;
+            font-size: 0.95rem;
             transition: all 0.2s ease;
         }
 
         .menu-item:hover {
             background-color: var(--sidebar-hover);
             color: #ffffff;
+            padding-left: 1.25rem; /* Efek geser halus saat di-hover */
         }
 
         .menu-item.active {
             background-color: var(--sidebar-hover);
-            color: #3b82f6;
+            color: #ffffff;
             font-weight: 600;
-            border-left: 4px solid #3b82f6;
+            border-left: 4px solid var(--primary);
             border-radius: 4px var(--radius-md) var(--radius-md) 4px;
         }
 
-        .menu-item svg {
-            width: 22px;
-            height: 22px;
-            flex-shrink: 0;
-            transition: transform 0.2s ease;
-        }
-
-        .menu-item:hover svg {
-            transform: translateX(2px);
-        }
-
         .logout-btn {
-            background-color: rgba(239, 68, 68, 0.1);
+            background-color: transparent;
             color: #f87171;
             border: 1px solid rgba(239, 68, 68, 0.2);
-            padding: 0.8rem 1rem;
+            padding: 0.85rem 1rem;
             border-radius: var(--radius-md);
             cursor: pointer;
-            font-weight: 600;
-            font-size: 0.925rem;
-            display: flex;
-            align-items: center;
-            gap: 12px;
+            font-weight: 500;
+            font-size: 0.95rem;
+            text-align: left;
             transition: all 0.2s ease;
             margin-top: auto;
         }
@@ -159,7 +129,6 @@
             background-color: #ef4444;
             color: #ffffff;
             border-color: #ef4444;
-            box-shadow: 0 4px 12px rgba(239, 68, 68, 0.2);
         }
 
         /* --- KONTEN UTAMA KANAN --- */
@@ -173,7 +142,7 @@
         /* Top Navbar */
         .header {
             background-color: #ffffff;
-            padding: 1.25rem 2.5rem;
+            padding: 1rem 2.5rem;
             border-bottom: 1px solid var(--border);
             display: flex;
             justify-content: space-between;
@@ -186,58 +155,51 @@
 
         .current-title {
             font-size: 1.25rem;
-            font-weight: 700;
+            font-weight: 600;
             color: var(--text-main);
             letter-spacing: -0.5px;
         }
 
+        /* Profil User Diperbarui (Lebih Ringkas & Profesional) */
         .user-profile {
             display: flex;
             align-items: center;
             gap: 12px;
+            padding: 6px 12px 6px 6px;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+
+        .user-profile:hover {
+            background-color: var(--bg-main);
         }
 
         .avatar-placeholder {
             width: 36px;
             height: 36px;
-            background-color: var(--primary-light);
-            color: var(--primary);
+            background: linear-gradient(135deg, var(--primary), #1d4ed8);
+            color: #ffffff;
             font-weight: 600;
             display: flex;
             align-items: center;
             justify-content: center;
             border-radius: 50%;
-            font-size: 0.875rem;
-            border: 1px solid var(--border);
+            font-size: 0.95rem;
+            box-shadow: 0 2px 4px rgba(37, 99, 235, 0.2);
         }
 
-        .user-info-text {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .user-info-text .name {
-            font-size: 0.875rem;
+        .user-name {
+            font-size: 0.9rem;
             font-weight: 600;
             color: var(--text-main);
-        }
-
-        .user-badge {
-            align-self: flex-start;
-            background-color: #f0fdf4;
-            color: var(--success);
-            padding: 2px 8px;
-            border-radius: 12px;
-            font-weight: 600;
-            font-size: 0.75rem;
-            margin-top: 1px;
         }
 
         /* SPA Layout Konten */
         .content-section {
             padding: 2.5rem;
             display: none;
-            animation: slideUpFade 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            animation: slideUpFade 0.3s ease-out;
         }
 
         .content-section.active {
@@ -249,7 +211,7 @@
         }
 
         .page-header h1 {
-            font-size: 1.75rem;
+            font-size: 1.5rem;
             font-weight: 700;
             color: var(--text-main);
             letter-spacing: -0.5px;
@@ -261,46 +223,6 @@
             color: var(--text-muted);
         }
 
-        /* UI Cards Grid & Stats */
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 2rem;
-        }
-
-        .stat-card {
-            background: #ffffff;
-            padding: 1.5rem;
-            border-radius: var(--radius-lg);
-            border: 1px solid var(--border);
-            box-shadow: var(--shadow-sm);
-            display: flex;
-            align-items: center;
-            gap: 16px;
-        }
-
-        .stat-icon {
-            width: 48px;
-            height: 48px;
-            border-radius: var(--radius-md);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .stat-info .value {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--text-main);
-        }
-
-        .stat-info .label {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            font-weight: 500;
-        }
-
         .card {
             background: #ffffff;
             padding: 2rem;
@@ -309,58 +231,64 @@
             box-shadow: var(--shadow-sm);
         }
 
-        /* Desain Tabel Data Profesional */
+        .card h3 {
+            font-size: 1.1rem;
+            margin-bottom: 12px;
+            color: var(--text-main);
+        }
+
+        .card p {
+            color: var(--text-muted);
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+
+        /* Tabel Sederhana */
         .table-responsive {
             width: 100%;
             overflow-x: auto;
-            margin-top: 1rem;
+            margin-top: 1.5rem;
         }
 
         table {
             width: 100%;
             border-collapse: collapse;
             text-align: left;
-            font-size: 0.9rem;
         }
 
         th {
             background-color: var(--bg-main);
             color: var(--text-muted);
-            padding: 0.85rem 1rem;
+            padding: 1rem;
             font-weight: 600;
             border-bottom: 1px solid var(--border);
+            font-size: 0.8rem;
             text-transform: uppercase;
-            font-size: 0.75rem;
             letter-spacing: 0.5px;
         }
 
         td {
             padding: 1rem;
             border-bottom: 1px solid var(--border);
-            color: #334155;
+            font-size: 0.95rem;
+            color: var(--text-main);
         }
 
-        tr:last-child td {
-            border-bottom: none;
-        }
+        tr:last-child td { border-bottom: none; }
+        tr:hover td { background-color: var(--primary-light); }
 
-        tr:hover td {
+        .badge {
             background-color: var(--primary-light);
-        }
-
-        .badge-table {
-            padding: 4px 8px;
+            color: var(--primary);
+            padding: 4px 10px;
             border-radius: 6px;
-            font-size: 0.775rem;
+            font-size: 0.8rem;
             font-weight: 600;
         }
 
-        .badge-a { background-color: #eff6ff; color: #1d4ed8; }
-        .badge-b { background-color: #fdf2f8; color: #be185d; }
-
         /* Animasi */
         @keyframes slideUpFade {
-            from { opacity: 0; transform: translateY(12px); }
+            from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
     </style>
@@ -369,137 +297,69 @@
 
     <div class="sidebar">
         <div class="sidebar-brand">
-            <div class="sidebar-brand-logo">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" style="width: 24px; height: 24px;">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z" />
-                </svg>
-            </div>
-            <div class="sidebar-brand-text">
-                <span class="title">E-Raport Hub</span>
-                <span class="subtitle">Sistem Penilaian Fleksibel</span>
-            </div>
+            <span class="title">E-Raport Hub</span>
+            <span class="subtitle">Sistem Penilaian</span>
         </div>
         
         <ul class="sidebar-menu">
-            <li class="menu-item active" data-target="beranda">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21.75h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21.875V16.5H15.75v5.375" />
-                </svg>
-                Beranda
-            </li>
-            <li class="menu-item" data-target="profil">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9s2.015-9 4.5-9m0 0a3.375 3.375 0 100 6.75 3.375 3.375 0 000-6.75z" />
-                </svg>
-                Profil Sekolah
-            </li>
-            <li class="menu-item" data-target="data-guru">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z" />
-                </svg>
-                Data Guru
-            </li>
-            <li class="menu-item" data-target="data-siswa">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M4.26 10.174c-.04-.49-.06-.983-.06-1.482 0-3.328 1.92-6.2 4.7-7.548a.75.75 0 011.048.662c0 .407-.026.809-.077 1.204a3.75 3.75 0 005.122 4.192c.313-.131.644-.236.987-.313a.75.75 0 01.932.743c-.006.273-.017.545-.034.814a6.2 6.2 0 01-2.902 4.675M4.26 10.174a6.19 6.19 0 002.932 4.697m-2.933-4.697a7.481 7.481 0 01-1.218-.396.75.75 0 00-1.023.666A12.016 12.016 0 004.09 19.38a.75.75 0 00.723.616h4.5a.75.75 0 00.723-.616 12.022 12.022 0 00-.776-4.512M7.192 14.871A6.241 6.241 0 0112 13.5c1.942 0 3.73.882 4.918 2.412m-9.726-1.041a7.485 7.485 0 00-1.018.396m10.744-1.437a7.485 7.485 0 011.018.396m0 0a6.19 6.19 0 012.932 4.697m-2.932-4.697a7.481 7.481 0 001.218-.396.75.75 0 011.023.666A12.016 12.016 0 0119.91 19.38a.75.75 0 01-.723.616h-4.5a.75.75 0 01-.723-.616 12.022 12.022 0 01.776-4.512" />
-                </svg>
-                Data Siswa
-            </li>
-            <li class="menu-item" data-target="mata-pelajaran">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" />
-                </svg>
-                Mata Pelajaran
-            </li>
+            <li class="menu-item active" data-target="beranda">Beranda</li>
+            <li class="menu-item" data-target="profil">Profil Sekolah</li>
+            <li class="menu-item" data-target="data-guru">Data Guru</li>
+            <li class="menu-item" data-target="data-siswa">Data Siswa</li>
+            <li class="menu-item" data-target="mata-pelajaran">Mata Pelajaran</li>
         </ul>
 
-        <button class="logout-btn" id="btn-logout">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" style="width: 20px; height: 20px;">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M19.5 12l-3-3m3 3l-3 3m3-3H9" />
-            </svg>
-            Keluar Aplikasi
-        </button>
+        <button class="logout-btn" id="btn-logout">Keluar Sistem</button>
     </div>
 
     <div class="main-container">
+        
         <div class="header">
             <div class="current-title" id="page-header-title">Beranda</div>
+            
             <div class="user-profile">
                 <div class="avatar-placeholder" id="avatar-letter">A</div>
-                <div class="user-info-text">
-                    <span class="name" id="user-display-role">ADMINISTRATOR</span>
-                    <span class="user-badge">Super Admin</span>
-                </div>
+                <div class="user-name" id="user-display-role">Admin</div>
             </div>
         </div>
 
         <div id="beranda" class="content-section active">
             <div class="page-header">
-                <h1>Selamat Datang di E-Raport Hub</h1>
-                <p>Ringkasan analitik dan pusat manajemen data instansi sekolah.</p>
+                <h1>Ringkasan Sistem</h1>
+                <p>Pusat manajemen data instansi sekolah berbasis Cloud Firestore.</p>
             </div>
             
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <div class="stat-icon" style="background-color: #eff6ff; color: #2563eb;">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" style="width:24px;height:24px;"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" /></svg>
-                    </div>
-                    <div class="stat-info">
-                        <div class="value">32</div>
-                        <div class="label">Total Guru</div>
-                    </div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-icon" style="background-color: #f0fdf4; color: #10b981;">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" style="width:24px;height:24px;"><path stroke-linecap="round" stroke-linejoin="round" d="M4.26 10.174c-.04-.49-.06-.983-.06-1.482 0-3.328 1.92-6.2 4.7-7.548a.75.75 0 011.048.662c0 .407-.026.809-.077 1.204a3.75 3.75 0 005.122 4.192c.313-.131.644-.236.987-.313a.75.75 0 01.932.743c-.006.273-.017.545-.034.814a6.2 6.2 0 01-2.902 4.675" /></svg>
-                    </div>
-                    <div class="stat-info">
-                        <div class="value">480</div>
-                        <div class="label">Total Siswa</div>
-                    </div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-icon" style="background-color: #fdf2f8; color: #db2777;">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" style="width:24px;height:24px;"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" /></svg>
-                    </div>
-                    <div class="stat-info">
-                        <div class="value">14</div>
-                        <div class="label">Mata Pelajaran</div>
-                    </div>
-                </div>
-            </div>
-
             <div class="card">
-                <h3 style="margin-bottom: 8px;">Informasi Sistem</h3>
-                <p style="color: var(--text-muted); margin: 0;">Gunakan navigasi menu di sebelah kiri untuk mengonfigurasi pengaturan kurikulum dan penginputan nilai rapot secara dinamis berbasis cloud Firestore.</p>
+                <h3>Selamat Datang di Dashboard</h3>
+                <p>Navigasi di sebelah kiri dirancang untuk mempercepat alur kerja Anda. Anda dapat berpindah antar menu secara instan tanpa memuat ulang halaman.</p>
             </div>
         </div>
 
         <div id="profil" class="content-section">
             <div class="page-header">
-                <h1>Profil Lembaga Instansi</h1>
+                <h1>Profil Lembaga</h1>
                 <p>Identitas dasar sekolah untuk pencetakan dokumen kover rapot.</p>
             </div>
             <div class="card">
-                <h3 style="margin-bottom: 12px;">Data Utama Lembaga</h3>
-                <p style="color: var(--text-muted);">Halaman konfigurasi NPSN, Nama Instansi, Kebijakan Kurikulum (Merdeka/K13), serta nama Kepala Sekolah yang akan dihubungkan ke dokumen database.</p>
+                <h3>Data Utama Lembaga</h3>
+                <p>Halaman konfigurasi NPSN, Nama Instansi, Kebijakan Kurikulum, serta nama Kepala Sekolah.</p>
             </div>
         </div>
 
         <div id="data-guru" class="content-section">
             <div class="page-header">
-                <h1>Manajemen Data Guru</h1>
-                <p>Kelola data otentikasi tenaga pendidik dan pembagian tugas wali kelas.</p>
+                <h1>Data Guru</h1>
+                <p>Kelola data pendidik dan pembagian tugas wali kelas.</p>
             </div>
             <div class="card">
-                <h3 style="margin-bottom: 12px;">Direktori Tenaga Pendidik</h3>
-                <p style="color: var(--text-muted); margin-bottom: 1.5rem;">Daftar guru aktif di database Firestore.</p>
+                <h3>Direktori Tenaga Pendidik</h3>
+                <p style="margin-bottom: 1rem;">Daftar guru aktif yang tersimpan dalam basis data.</p>
                 <div class="table-responsive">
                     <table>
                         <thead>
                             <tr>
                                 <th>NIP / Kode</th>
-                                <th>Nama Guru</th>
+                                <th>Nama Lengkap</th>
                                 <th>Status Jabatan</th>
                             </tr>
                         </thead>
@@ -512,7 +372,7 @@
                             <tr>
                                 <td>199107232015042003</td>
                                 <td>Siti Aminah, M.Pd.</td>
-                                <td>Guru Mapel / Admin</td>
+                                <td>Guru Mapel</td>
                             </tr>
                         </tbody>
                     </table>
@@ -522,52 +382,52 @@
 
         <div id="data-siswa" class="content-section">
             <div class="page-header">
-                <h1>Manajemen Data Siswa</h1>
-                <p>Kelola data peserta didik, NISN, serta manajemen rombongan belajar (rombel).</p>
+                <h1>Data Siswa</h1>
+                <p>Kelola data peserta didik dan manajemen rombongan belajar.</p>
             </div>
             <div class="card">
-                <h3 style="margin-bottom: 12px;">Daftar Murid Aktif</h3>
-                <p style="color: var(--text-muted);">Gunakan panel ini untuk mengunggah data siswa baru atau memetakan rombel kelas per tahun ajaran.</p>
+                <h3>Daftar Murid Aktif</h3>
+                <p>Gunakan panel ini untuk mengunggah data siswa baru atau memetakan rombel kelas.</p>
             </div>
         </div>
 
         <div id="mata-pelajaran" class="content-section">
             <div class="page-header">
-                <h1>Manajemen Mata Pelajaran</h1>
-                <p>Konfigurasi daftar mata pelajaran, pembagian kelompok kurikulum, dan KKM.</p>
+                <h1>Mata Pelajaran</h1>
+                <p>Konfigurasi daftar mata pelajaran, kelompok kurikulum, dan nilai ketuntasan (KKM).</p>
             </div>
             <div class="card">
-                <h3 style="margin-bottom: 12px;">Struktur Kurikulum Instansi</h3>
-                <p style="color: var(--text-muted); margin-bottom: 1.5rem;">Data di bawah ini dikelola secara dinamis dari koleksi <code>subjects</code> pada Firestore.</p>
+                <h3>Struktur Kurikulum</h3>
+                <p style="margin-bottom: 1rem;">Pengaturan muatan pelajaran yang digunakan dalam periode akademik saat ini.</p>
                 
                 <div class="table-responsive">
                     <table>
                         <thead>
                             <tr>
                                 <th>Kode Mapel</th>
-                                <th>Nama Mata Pelajaran</th>
+                                <th>Nama Pelajaran</th>
                                 <th>Kelompok</th>
-                                <th>KKM / Nilai Batas</th>
+                                <th>KKM</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td><code>MAPEL-MAT</code></td>
+                                <td>MAT</td>
                                 <td>Matematika</td>
-                                <td><span class="badge-table badge-a">Kelompok A (Wajib)</span></td>
-                                <td><strong>75</strong></td>
+                                <td><span class="badge">Wajib (A)</span></td>
+                                <td>75</td>
                             </tr>
                             <tr>
-                                <td><code>MAPEL-BIN</code></td>
+                                <td>BIN</td>
                                 <td>Bahasa Indonesia</td>
-                                <td><span class="badge-table badge-a">Kelompok A (Wajib)</span></td>
-                                <td><strong>70</strong></td>
+                                <td><span class="badge">Wajib (A)</span></td>
+                                <td>70</td>
                             </tr>
                             <tr>
-                                <td><code>MAPEL-ING</code></td>
+                                <td>ING</td>
                                 <td>Bahasa Inggris</td>
-                                <td><span class="badge-table badge-b">Muatan Lokal</span></td>
-                                <td><strong>75</strong></td>
+                                <td><span class="badge">Muatan Lokal</span></td>
+                                <td>75</td>
                             </tr>
                         </tbody>
                     </table>
@@ -578,45 +438,42 @@
     </div>
 
     <script type="module">
-        // --- PROTEKSI SESSION HALAMAN ---
+        // Proteksi Halaman
         if (sessionStorage.getItem("isLoggedIn") !== "true") {
-            alert("Akses ditolak! Sesi berakhir atau Anda belum login.");
             window.location.href = "../index.html"; 
         }
 
-        // --- AMBIL & SET INFORMASI ROLE USER ---
+        // Tampilkan Format Nama (Misal: Admin menjadi "Admin")
         const storedRole = sessionStorage.getItem("role") || "Admin";
-        document.getElementById("user-display-role").textContent = storedRole.toUpperCase();
-        // Ambil huruf pertama role untuk avatar lingkaran di pojok kanan atas
+        // Format agar huruf pertama kapital (Capitalize)
+        const formattedRole = storedRole.charAt(0).toUpperCase() + storedRole.slice(1).toLowerCase();
+        
+        document.getElementById("user-display-role").textContent = formattedRole;
         document.getElementById("avatar-letter").textContent = storedRole.charAt(0).toUpperCase();
 
-        // --- SISTEM TOGGLE NAVIGATION SPA ---
+        // SPA Navigation
         const menuItems = document.querySelectorAll(".menu-item");
         const sections = document.querySelectorAll(".content-section");
         const pageHeaderTitle = document.getElementById("page-header-title");
 
         menuItems.forEach(item => {
             item.addEventListener("click", () => {
-                // 1. Bersihkan status aktif lama
                 menuItems.forEach(menu => menu.classList.remove("active"));
                 sections.forEach(section => section.classList.remove("active"));
 
-                // 2. Aktifkan menu yang dipilih
                 item.classList.add("active");
                 
-                // 3. Tampilkan section target berdasarkan atribut data-target
                 const targetId = item.getAttribute("data-target");
                 const targetSection = document.getElementById(targetId);
                 if (targetSection) {
                     targetSection.classList.add("active");
                 }
 
-                // 4. Perbarui judul di top navbar
                 pageHeaderTitle.textContent = item.textContent.trim();
             });
         });
 
-        // --- LOGIKA SIGN OUT ---
+        // Logika Logout
         document.getElementById("btn-logout").addEventListener("click", () => {
             if (confirm("Apakah Anda yakin ingin keluar dari sistem?")) {
                 sessionStorage.clear();
