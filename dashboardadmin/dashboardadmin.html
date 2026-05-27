@@ -3,130 +3,194 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard Admin | E-Raport Fleksibel</title>
+    <title>Dashboard Admin | E-Raport Profesional</title>
     <style>
-        /* Reset & Layout Dasar */
-        * { 
-            box-sizing: border-box; 
-            margin: 0; 
-            padding: 0; 
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-        }
-        body { 
-            display: flex; 
-            height: 100vh; 
-            overflow: hidden; 
-            background-color: #f1f5f9; 
+        /* Reset & Variabel Dasar */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
         }
 
-        /* Sidebar Styling */
-        .sidebar { 
-            width: 260px; 
-            background-color: #0f172a; 
-            color: #f8fafc; 
-            display: flex; 
-            flex-direction: column; 
-            justify-content: space-between; 
-            padding: 1.5rem 1rem; 
+        body {
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+            background-color: #f8fafc;
+            color: #334155;
         }
-        .sidebar-brand { 
-            font-size: 1.3rem; 
-            font-weight: bold; 
-            margin-bottom: 2.5rem; 
-            padding-left: 0.5rem; 
-            color: #38bdf8; 
-            letter-spacing: 0.5px;
+
+        /* --- SIDEBAR DI SISI KIRI --- */
+        .sidebar {
+            width: 280px;
+            background-color: #0f172a;
+            color: #f8fafc;
+            display: flex;
+            flex-direction: column;
+            padding: 2rem 1rem;
+            flex-shrink: 0;
         }
-        .sidebar-menu { 
-            list-style: none; 
-            display: flex; 
-            flex-direction: column; 
-            gap: 0.4rem; 
+
+        .sidebar-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 2.5rem;
+            padding-left: 0.5rem;
         }
-        .menu-item { 
-            display: flex; 
-            align-items: center; 
-            padding: 0.8rem 1rem; 
-            border-radius: 6px; 
-            color: #94a3b8; 
-            text-decoration: none; 
-            cursor: pointer; 
-            transition: all 0.2s ease; 
+
+        .sidebar-brand svg {
+            width: 28px;
+            height: 28px;
+            color: #3b82f6;
         }
-        .menu-item:hover, .menu-item.active { 
-            background-color: #1e293b; 
-            color: #f8fafc; 
+
+        .sidebar-menu {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            flex-grow: 1;
         }
-        .menu-item.active { 
-            border-left: 4px solid #38bdf8; 
-            font-weight: 600;
-        }
-        .logout-btn { 
-            background-color: #ef4444; 
-            color: white; 
-            border: none; 
-            padding: 0.8rem 1rem; 
-            border-radius: 6px; 
-            cursor: pointer; 
-            text-align: left; 
-            width: 100%; 
+
+        .menu-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 0.85rem 1rem;
+            border-radius: 10px;
+            color: #94a3b8;
+            text-decoration: none;
+            cursor: pointer;
             font-weight: 500;
-            transition: background 0.2s; 
-        }
-        .logout-btn:hover { background-color: #dc2626; }
-
-        /* Main Content Container */
-        .main-container { 
-            flex: 1; 
-            display: flex; 
-            flex-direction: column; 
-            overflow-y: auto; 
-        }
-        
-        /* Top Header */
-        .header { 
-            background-color: #ffffff; 
-            padding: 1.2rem 2rem; 
-            border-bottom: 1px solid #e2e8f0; 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center; 
-        }
-        .current-title { 
-            font-size: 1.1rem; 
-            font-weight: 600; 
-            color: #1e293b; 
-        }
-        .user-info { 
-            font-size: 0.9rem; 
-            color: #64748b; 
+            font-size: 0.95rem;
+            transition: all 0.2s ease;
         }
 
-        /* SPA Sections Management */
-        .content-section { 
-            padding: 2rem; 
-            display: none; /* Sembunyikan secara default */
-            animation: fadeIn 0.2s ease-in-out;
-        }
-        .content-section.active { 
-            display: block; /* Tampilkan jika aktif */
+        .menu-item:hover {
+            background-color: #1e293b;
+            color: #f8fafc;
         }
 
-        /* UI Elements / Panels */
-        .card { 
-            background: #ffffff; 
-            padding: 1.5rem; 
-            border-radius: 8px; 
-            box-shadow: 0 1px 3px rgba(0,0,0,0.05); 
-            margin-top: 1.2rem; 
+        .menu-item.active {
+            background-color: #1e293b;
+            color: #3b82f6;
+            font-weight: 600;
+            border-left: 4px solid #3b82f6;
+            border-radius: 4px 10px 10px 4px;
+        }
+
+        .menu-item svg {
+            width: 20px;
+            height: 20px;
+            flex-shrink: 0;
+        }
+
+        .logout-btn {
+            background-color: #ef4444;
+            color: white;
+            border: none;
+            padding: 0.85rem 1rem;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: background 0.2s ease;
+            margin-top: auto;
+        }
+
+        .logout-btn:hover {
+            background-color: #dc2626;
+        }
+
+        /* --- KONTEN UTAMA DI SISI KANAN --- */
+        .main-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+        }
+
+        /* Top Header Nav bar */
+        .header {
+            background-color: #ffffff;
+            padding: 1.25rem 2.5rem;
+            border-bottom: 1px solid #e2e8f0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-shrink: 0;
+        }
+
+        .current-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #0f172a;
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.9rem;
+            color: #64748b;
+        }
+
+        .user-badge {
+            background-color: #e0f2fe;
+            color: #0369a1;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.8rem;
+        }
+
+        /* SPA Konten Manajemen */
+        .content-section {
+            padding: 2.5rem;
+            display: none;
+            animation: slideUpFade 0.3s ease-out;
+        }
+
+        .content-section.active {
+            display: block;
+        }
+
+        /* UI Elemen / Tampilan Card */
+        .page-header {
+            margin-bottom: 1.75rem;
+        }
+
+        .page-header h1 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: #0f172a;
+            margin-bottom: 4px;
+        }
+
+        .page-header p {
+            font-size: 0.95rem;
+            color: #64748b;
+        }
+
+        .card {
+            background: #ffffff;
+            padding: 2rem;
+            border-radius: 12px;
             border: 1px solid #e2e8f0;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
         }
-        h1 { color: #0f172a; font-size: 1.6rem; font-weight: 700; }
-        h2 { color: #334155; font-size: 1.1rem; margin-bottom: 0.8rem; }
-        p { color: #64748b; font-size: 0.95rem; line-height: 1.5; }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(2px); }
+        /* Animasi Transisi Halaman */
+        @keyframes slideUpFade {
+            from { opacity: 0; transform: translateY(8px); }
             to { opacity: 1; transform: translateY(0); }
         }
     </style>
@@ -134,115 +198,165 @@
 <body>
 
     <div class="sidebar">
-        <div>
-            <div class="sidebar-brand">E-Raport Sistem</div>
-            <ul class="sidebar-menu">
-                <li class="menu-item active" data-target="beranda">Beranda</li>
-                <li class="menu-item" data-target="profil">Profil</li>
-                <li class="menu-item" data-target="data-guru">Data Guru</li>
-                <li class="menu-item" data-target="data-siswa">Data Siswa</li>
-            </ul>
+        <div class="sidebar-brand">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M4.263 15.518a5.978 5.978 0 013.003-7.583m11.468 0a5.978 5.978 0 013.003 7.583M11.208 8.25L12 3.75l.792 4.5M12 18.75a2.25 2.25 0 100-4.5 2.25 2.25 0 000 4.5z" />
+            </svg>
+            <span>E-Raport Admin</span>
         </div>
-        <button class="logout-btn" id="btn-logout">Keluar Aplikasi</button>
+        
+        <ul class="sidebar-menu">
+            <li class="menu-item active" data-target="beranda">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21.75h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21.875V16.5H15.75v5.375" />
+                </svg>
+                Beranda
+            </li>
+            <li class="menu-item" data-target="profil">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9s2.015-9 4.5-9m0 0a3.375 3.375 0 100 6.75 3.375 3.375 0 000-6.75z" />
+                </svg>
+                Profil Sekolah
+            </li>
+            <li class="menu-item" data-target="data-guru">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M4.26 10.174c-.04-.49-.06-.983-.06-1.482 0-3.328 1.92-6.2 4.7-7.548a.75.75 0 011.048.662c0 .407-.026.809-.077 1.204a3.75 3.75 0 005.122 4.192c.313-.131.644-.236.987-.313a.75.75 0 01.932.743c-.006.273-.017.545-.034.814a6.2 6.2 0 01-2.902 4.675M4.26 10.174a6.19 6.19 0 002.932 4.697m-2.933-4.697a7.481 7.481 0 01-1.218-.396.75.75 0 00-1.023.666A12.016 12.016 0 004.09 19.38a.75.75 0 00.723.616h4.5a.75.75 0 00.723-.616 12.022 12.022 0 00-.776-4.512M7.192 14.871A6.241 6.241 0 0112 13.5c1.942 0 3.73.882 4.918 2.412m-9.726-1.041a7.485 7.485 0 00-1.018.396m10.744-1.437a7.485 7.485 0 011.018.396m0 0a6.19 6.19 0 012.932 4.697m-2.932-4.697a7.481 7.481 0 001.218-.396.75.75 0 011.023.666A12.016 12.016 0 0119.91 19.38a.75.75 0 01-.723.616h-4.5a.75.75 0 01-.723-.616 12.022 12.022 0 01.776-4.512" />
+                </svg>
+                Data Guru
+            </li>
+            <li class="menu-item" data-target="data-siswa">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-2.533-3.326 10.56 10.56 0 00-3.436-.572H14H15zM9 11a4 4 0 100-8 4 4 0 000 8zm0 2a6 6 0 00-6 6v.75c0 .414.336.75.75.75h12.5a.75.75 0 00.75-.75V19a6 6 0 00-6-6H9z" />
+                </svg>
+                Data Siswa
+            </li>
+            <li class="menu-item" data-target="mata-pelajaran">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" />
+                </svg>
+                Mata Pelajaran
+            </li>
+        </ul>
+
+        <button class="logout-btn" id="btn-logout">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M19.5 12l-3-3m3 3l-3 3m3-3H9" />
+            </svg>
+            Keluar Aplikasi
+        </button>
     </div>
 
     <div class="main-container">
         <div class="header">
             <div class="current-title" id="page-header-title">Beranda</div>
-            <div class="user-info">Login Sebagai: <strong id="user-display-role">Admin</strong></div>
+            <div class="user-profile">
+                <span id="user-display-role">Admin</span>
+                <span class="user-badge">Super User</span>
+            </div>
         </div>
 
         <div id="beranda" class="content-section active">
-            <h1>Beranda Utama</h1>
+            <div class="page-header">
+                <h1>Beranda Utama</h1>
+                <p>Ringkasan informasi dan pintasan sistem E-Raport.</p>
+            </div>
             <div class="card">
-                <h2>Selamat Datang di Panel Kendali E-Raport</h2>
-                <p>Melalui halaman ini, Anda dapat mengonfigurasi komponen penilaian, mengelola data pengguna, dan mengatur fleksibilitas sistem rapor secara dinamis.</p>
+                <h3>Selamat Datang kembali di Dashboard Admin</h3>
+                <p style="margin-top: 10px; color: #64748b;">Gunakan panel menu di sebelah kiri untuk mengonfigurasi dan mengelola data sekolah, kurikulum, serta komponen penugasan akademik secara real-time.</p>
             </div>
         </div>
 
         <div id="profil" class="content-section">
-            <h1>Profil Sekolah & Aplikasi</h1>
+            <div class="page-header">
+                <h1>Profil Lembaga Sekolah</h1>
+                <p>Kelola identitas utama sekolah dan data administrasi dasar.</p>
+            </div>
             <div class="card">
-                <h2>Identitas Lembaga</h2>
-                <p>Bagian ini digunakan untuk memperbarui data sekolah seperti Nama Sekolah, NPSN, Alamat, dan informasi Kepala Sekolah.</p>
+                <h3>Identitas Sekolah</h3>
+                <p style="margin-top: 10px; color: #64748b;">Halaman konfigurasi untuk NPSN, Alamat Instansi, Akreditasi, dan Data Kepala Sekolah.</p>
             </div>
         </div>
 
         <div id="data-guru" class="content-section">
-            <h1>Manajemen Data Guru</h1>
+            <div class="page-header">
+                <h1>Manajemen Data Guru</h1>
+                <p>Kelola data pendidik, pembuatan akun, dan delegasi hak akses wali kelas.</p>
+            </div>
             <div class="card">
-                <h2>Daftar Tenaga Pendidik</h2>
-                <p>Data guru yang terintegrasi langsung dengan Firestore akan ditampilkan dan dikelola di bagian ini.</p>
-                </div>
+                <h3>Daftar Tenaga Pendidik</h3>
+                <p style="margin-top: 10px; color: #64748b;">Komponen manipulasi data guru yang akan dihubungkan ke Firestore.</p>
+            </div>
         </div>
 
         <div id="data-siswa" class="content-section">
-            <h1>Manajemen Data Siswa</h1>
+            <div class="page-header">
+                <h1>Manajemen Data Siswa</h1>
+                <p>Atur data murid, rombongan belajar (rombel), dan riwayat naik kelas.</p>
+            </div>
             <div class="card">
-                <h2>Daftar Peserta Didik</h2>
-                <p>Gunakan bagian ini untuk memetakan rombongan belajar (rombel), menambah siswa baru, atau mengunduh template data.</p>
-                </div>
+                <h3>Daftar Peserta Didik</h3>
+                <p style="margin-top: 10px; color: #64748b;">Gunakan bagian ini untuk memproses rombel kelas dan mengelola NISN siswa.</p>
+            </div>
         </div>
+
+        <div id="mata-pelajaran" class="content-section">
+            <div class="page-header">
+                <h1>Manajemen Mata Pelajaran</h1>
+                <p>Atur struktur mata pelajaran kelompok wajib, pilihan, muatan lokal, dan KKM.</p>
+            </div>
+            <div class="card">
+                <h3>Daftar Mata Pelajaran / Kurikulum</h3>
+                <p style="margin-top: 10px; color: #64748b;">Halaman ini digunakan untuk menarik, mengubah, dan menambah koleksi mata pelajaran (subjects) secara dinamis langsung dari basis data Firestore.</p>
+            </div>
+        </div>
+
     </div>
 
     <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-        import { getFirestore } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
-
-        // Konfigurasi Firebase disiapkan untuk operasional data selanjutnya
-        const firebaseConfig = {
-            apiKey: "AIzaSyCBXA1Atpm8LpDSdAr02OEvuADP2bUT9Gk",
-            authDomain: "eraport-87687.firebaseapp.com",
-            projectId: "eraport-87687",
-            storageBucket: "eraport-87687.firebasestorage.app",
-            messagingSenderId: "879847959076",
-            appId: "1:879847959076:web:51ca5db07bb4724b7e06b1",
-            measurementId: "G-NWCTMGHZEV"
-        };
-
-        const app = initializeApp(firebaseConfig);
-        const db = getFirestore(app);
-
-        // --- SISTEM PROTEKSI HALAMAN ---
-        // Memastikan user tidak melompati form login index.html
+        // Proteksi Halaman: Cek status login sebelum parsing DOM
         if (sessionStorage.getItem("isLoggedIn") !== "true") {
-            alert("Akses ditolak! Silakan login terlebih dahulu.");
+            alert("Sesi berakhir atau Anda belum login. Dialihkan ke halaman utama.");
             window.location.href = "../index.html"; 
         }
 
-        // Tampilkan info peran pengguna dari sessionStorage
-        document.getElementById("user-display-role").textContent = sessionStorage.getItem("role") || "Admin";
+        // Tampilkan Peran dari Session Storage ke Header
+        const storedRole = sessionStorage.getItem("role");
+        if (storedRole) {
+            document.getElementById("user-display-role").textContent = storedRole.toUpperCase();
+        }
 
-
-        // --- LOGIKA UTAMA SPA ROUTING ---
+        // Ambil Node Elemen Navigasi
         const menuItems = document.querySelectorAll(".menu-item");
         const sections = document.querySelectorAll(".content-section");
         const pageHeaderTitle = document.getElementById("page-header-title");
 
+        // Logika Toggling Tampilan SPA 
         menuItems.forEach(item => {
             item.addEventListener("click", () => {
-                // 1. Bersihkan status aktif dari semua menu dan panel konten
-                menuItems.forEach(i => i.classList.remove("active"));
-                sections.forEach(s => s.classList.remove("active"));
+                // 1. Matikan class active yang sedang berjalan pada menu & konten
+                menuItems.forEach(menu => menu.classList.remove("active"));
+                sections.forEach(section => section.classList.remove("active"));
 
-                // 2. Set menu yang diklik menjadi aktif
+                // 2. Aktifkan menu yang baru saja diklik
                 item.classList.add("active");
                 
-                // 3. Ambil target id dari atribut data-target dan tampilkan panelnya
+                // 3. Tampilkan target section konten berdasarkan atribut data-target
                 const targetId = item.getAttribute("data-target");
-                document.getElementById(targetId).classList.add("active");
+                const targetSection = document.getElementById(targetId);
+                if (targetSection) {
+                    targetSection.classList.add("active");
+                }
 
-                // 4. Perbarui title bar bagian atas agar sesuai menu
-                pageHeaderTitle.textContent = item.textContent;
+                // 4. Update teks judul pada bar atas header
+                pageHeaderTitle.textContent = item.textContent.trim();
             });
         });
 
-
-        // --- LOGIKA KELUAR / LOGOUT ---
+        // Logika Tombol Keluar / Sign Out
         document.getElementById("btn-logout").addEventListener("click", () => {
-            if (confirm("Apakah Anda yakin ingin keluar dari aplikasi?")) {
-                sessionStorage.clear(); // Hapus token session
-                window.location.href = "../index.html"; // Kembali ke halaman login utama
+            if (confirm("Apakah Anda yakin ingin keluar dari sistem?")) {
+                sessionStorage.clear(); // Hapus semua token kredensial sementara
+                window.location.href = "../index.html"; // Redirect ke form login
             }
         });
     </script>
