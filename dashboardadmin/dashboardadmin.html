@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard Admin | E-Raport Modern</title>
+    <title>Dashboard Admin | Skoola E-Raport</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -30,6 +30,7 @@
             --radius-lg: 12px;
             --radius-md: 8px;
             --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
         }
 
         body {
@@ -41,7 +42,7 @@
             -webkit-font-smoothing: antialiased;
         }
 
-        /* --- SIDEBAR KIRI --- */
+        /* --- SIDEBAR KIRI (DESKTOP) --- */
         .sidebar {
             width: 260px;
             background-color: var(--sidebar-bg);
@@ -51,6 +52,7 @@
             padding: 2rem 1.25rem;
             flex-shrink: 0;
             border-right: 1px solid rgba(255, 255, 255, 0.05);
+            transition: transform 0.3s ease;
         }
 
         .sidebar-brand {
@@ -84,7 +86,6 @@
             flex-grow: 1;
         }
 
-        /* Perbaikan Menu Tanpa Ikon */
         .menu-item {
             display: block;
             padding: 0.85rem 1rem;
@@ -100,7 +101,7 @@
         .menu-item:hover {
             background-color: var(--sidebar-hover);
             color: #ffffff;
-            padding-left: 1.25rem; /* Efek geser halus saat di-hover */
+            padding-left: 1.25rem;
         }
 
         .menu-item.active {
@@ -137,6 +138,7 @@
             display: flex;
             flex-direction: column;
             overflow-y: auto;
+            position: relative;
         }
 
         /* Top Navbar */
@@ -153,6 +155,27 @@
             z-index: 10;
         }
 
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        /* Tombol Back untuk Mobile */
+        .btn-back-mobile {
+            display: none;
+            background: transparent;
+            border: none;
+            color: var(--text-main);
+            cursor: pointer;
+            padding: 5px;
+            border-radius: 5px;
+        }
+
+        .btn-back-mobile:hover {
+            background-color: var(--bg-main);
+        }
+
         .current-title {
             font-size: 1.25rem;
             font-weight: 600;
@@ -160,7 +183,6 @@
             letter-spacing: -0.5px;
         }
 
-        /* Profil User Diperbarui (Lebih Ringkas & Profesional) */
         .user-profile {
             display: flex;
             align-items: center;
@@ -243,47 +265,89 @@
             font-size: 0.95rem;
         }
 
-        /* Tabel Sederhana */
-        .table-responsive {
-            width: 100%;
-            overflow-x: auto;
-            margin-top: 1.5rem;
+        /* GRID MENU UNTUK MOBILE DI BERANDA */
+        .mobile-grid-menu {
+            display: none; /* Sembunyikan di desktop */
         }
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            text-align: left;
-        }
+        /* --- RESPONSIVE / MOBILE STYLE --- */
+        @media (max-width: 768px) {
+            .sidebar {
+                display: none; /* Sembunyikan sidebar di mobile */
+            }
 
-        th {
-            background-color: var(--bg-main);
-            color: var(--text-muted);
-            padding: 1rem;
-            font-weight: 600;
-            border-bottom: 1px solid var(--border);
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
+            .header {
+                padding: 1rem 1.25rem;
+            }
 
-        td {
-            padding: 1rem;
-            border-bottom: 1px solid var(--border);
-            font-size: 0.95rem;
-            color: var(--text-main);
-        }
+            .content-section {
+                padding: 1.25rem;
+            }
 
-        tr:last-child td { border-bottom: none; }
-        tr:hover td { background-color: var(--primary-light); }
+            .card {
+                padding: 1.25rem;
+            }
 
-        .badge {
-            background-color: var(--primary-light);
-            color: var(--primary);
-            padding: 4px 10px;
-            border-radius: 6px;
-            font-size: 0.8rem;
-            font-weight: 600;
+            /* Sembunyikan card selamat datang di mobile agar fokus ke grid */
+            .desktop-welcome-card {
+                display: none;
+            }
+
+            /* Tampilkan Grid Menu di Halaman Beranda Mobile */
+            .mobile-grid-menu {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
+                margin-top: 1rem;
+            }
+
+            .grid-item {
+                background-color: #ffffff;
+                border: 1px solid var(--border);
+                border-radius: var(--radius-lg);
+                padding: 1.5rem 1rem;
+                text-align: center;
+                box-shadow: var(--shadow-sm);
+                cursor: pointer;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                gap: 10px;
+                transition: transform 0.1s;
+            }
+
+            .grid-item:active {
+                transform: scale(0.97);
+                background-color: var(--primary-light);
+            }
+
+            .grid-item span {
+                font-size: 0.85rem;
+                font-weight: 600;
+                color: var(--text-main);
+            }
+            
+            .grid-item .icon-circle {
+                width: 40px;
+                height: 40px;
+                background-color: var(--primary-light);
+                color: var(--primary);
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-weight: bold;
+                font-size: 1.2rem;
+            }
+
+            .grid-item.logout {
+                background-color: #fef2f2;
+                border-color: #fecaca;
+            }
+
+            .grid-item.logout span { color: #dc2626; }
+            .grid-item.logout .icon-circle { background-color: #fee2e2; color: #dc2626; }
         }
 
         /* Animasi */
@@ -297,25 +361,33 @@
 
     <div class="sidebar">
         <div class="sidebar-brand">
-            <span class="title">E-Raport Hub</span>
-            <span class="subtitle">Sistem Penilaian</span>
+            <span class="title">Skoola E-Raport</span>
+            <span class="subtitle">Dashboard Admin</span>
         </div>
         
         <ul class="sidebar-menu">
             <li class="menu-item active" data-target="beranda">Beranda</li>
             <li class="menu-item" data-target="profil">Profil Sekolah</li>
-            <li class="menu-item" data-target="data-guru">Data Guru</li>
+            <li class="menu-item" data-target="tahun-pelajaran">Tahun Pelajaran</li> <li class="menu-item" data-target="data-guru">Data Guru</li>
             <li class="menu-item" data-target="data-siswa">Data Siswa</li>
             <li class="menu-item" data-target="mata-pelajaran">Mata Pelajaran</li>
         </ul>
 
-        <button class="logout-btn" id="btn-logout">Keluar Sistem</button>
+        <button class="logout-btn" id="btn-logout-desktop">Keluar Sistem</button>
     </div>
 
     <div class="main-container">
         
         <div class="header">
-            <div class="current-title" id="page-header-title">Beranda</div>
+            <div class="header-left">
+                <button class="btn-back-mobile" id="btn-back-mobile">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="19" y1="12" x2="5" y2="12"></line>
+                        <polyline points="12 19 5 12 12 5"></polyline>
+                    </svg>
+                </button>
+                <div class="current-title" id="page-header-title">Beranda</div>
+            </div>
             
             <div class="user-profile">
                 <div class="avatar-placeholder" id="avatar-letter">A</div>
@@ -325,13 +397,40 @@
 
         <div id="beranda" class="content-section active">
             <div class="page-header">
-                <h1>Ringkasan Sistem</h1>
-                <p>Pusat manajemen data instansi sekolah berbasis Cloud Firestore.</p>
+                <h1>Sistem Manajemen</h1>
+                <p>Pusat data instansi berbasis Cloud Firestore.</p>
             </div>
             
-            <div class="card">
+            <div class="card desktop-welcome-card">
                 <h3>Selamat Datang di Dashboard</h3>
-                <p>Navigasi di sebelah kiri dirancang untuk mempercepat alur kerja Anda. Anda dapat berpindah antar menu secara instan tanpa memuat ulang halaman.</p>
+                <p>Navigasi di sebelah kiri dirancang untuk mempercepat alur kerja Anda. Anda dapat berpindah antar menu secara instan.</p>
+            </div>
+
+            <div class="mobile-grid-menu">
+                <div class="grid-item" data-target="profil">
+                    <div class="icon-circle">P</div>
+                    <span>Profil Sekolah</span>
+                </div>
+                <div class="grid-item" data-target="tahun-pelajaran">
+                    <div class="icon-circle">T</div>
+                    <span>Tahun Pelajaran</span>
+                </div>
+                <div class="grid-item" data-target="data-guru">
+                    <div class="icon-circle">G</div>
+                    <span>Data Guru</span>
+                </div>
+                <div class="grid-item" data-target="data-siswa">
+                    <div class="icon-circle">S</div>
+                    <span>Data Siswa</span>
+                </div>
+                <div class="grid-item" data-target="mata-pelajaran">
+                    <div class="icon-circle">M</div>
+                    <span>Mata Pelajaran</span>
+                </div>
+                <div class="grid-item logout" id="btn-logout-mobile">
+                    <div class="icon-circle">X</div>
+                    <span>Keluar</span>
+                </div>
             </div>
         </div>
 
@@ -346,6 +445,17 @@
             </div>
         </div>
 
+        <div id="tahun-pelajaran" class="content-section">
+            <div class="page-header">
+                <h1>Tahun Pelajaran</h1>
+                <p>Manajemen periode akademik dan semester aktif.</p>
+            </div>
+            <div class="card">
+                <h3>Periode Aktif Saat Ini</h3>
+                <p>Atur tahun ajaran (contoh: 2025/2026) dan semester (Ganjil/Genap) yang sedang berjalan agar sinkron dengan input nilai rapot di Firestore.</p>
+            </div>
+        </div>
+
         <div id="data-guru" class="content-section">
             <div class="page-header">
                 <h1>Data Guru</h1>
@@ -353,30 +463,7 @@
             </div>
             <div class="card">
                 <h3>Direktori Tenaga Pendidik</h3>
-                <p style="margin-bottom: 1rem;">Daftar guru aktif yang tersimpan dalam basis data.</p>
-                <div class="table-responsive">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>NIP / Kode</th>
-                                <th>Nama Lengkap</th>
-                                <th>Status Jabatan</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>198503112010011002</td>
-                                <td>Budi Santoso, S.Pd.</td>
-                                <td>Wali Kelas 6A</td>
-                            </tr>
-                            <tr>
-                                <td>199107232015042003</td>
-                                <td>Siti Aminah, M.Pd.</td>
-                                <td>Guru Mapel</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+                <p>Daftar guru aktif yang tersimpan dalam basis data sistem terpadu.</p>
             </div>
         </div>
 
@@ -394,44 +481,11 @@
         <div id="mata-pelajaran" class="content-section">
             <div class="page-header">
                 <h1>Mata Pelajaran</h1>
-                <p>Konfigurasi daftar mata pelajaran, kelompok kurikulum, dan nilai ketuntasan (KKM).</p>
+                <p>Konfigurasi daftar mata pelajaran, kelompok kurikulum, dan nilai ketuntasan.</p>
             </div>
             <div class="card">
                 <h3>Struktur Kurikulum</h3>
-                <p style="margin-bottom: 1rem;">Pengaturan muatan pelajaran yang digunakan dalam periode akademik saat ini.</p>
-                
-                <div class="table-responsive">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Kode Mapel</th>
-                                <th>Nama Pelajaran</th>
-                                <th>Kelompok</th>
-                                <th>KKM</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>MAT</td>
-                                <td>Matematika</td>
-                                <td><span class="badge">Wajib (A)</span></td>
-                                <td>75</td>
-                            </tr>
-                            <tr>
-                                <td>BIN</td>
-                                <td>Bahasa Indonesia</td>
-                                <td><span class="badge">Wajib (A)</span></td>
-                                <td>70</td>
-                            </tr>
-                            <tr>
-                                <td>ING</td>
-                                <td>Bahasa Inggris</td>
-                                <td><span class="badge">Muatan Lokal</span></td>
-                                <td>75</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+                <p>Pengaturan muatan pelajaran yang digunakan dalam periode akademik saat ini.</p>
             </div>
         </div>
 
@@ -440,44 +494,92 @@
     <script type="module">
         // Proteksi Halaman
         if (sessionStorage.getItem("isLoggedIn") !== "true") {
-            window.location.href = "../index.html"; 
+            // Uncomment baris di bawah ini saat di-deploy
+            // window.location.href = "../index.html"; 
         }
 
         // Tampilkan Format Nama (Misal: Admin menjadi "Admin")
         const storedRole = sessionStorage.getItem("role") || "Admin";
-        // Format agar huruf pertama kapital (Capitalize)
         const formattedRole = storedRole.charAt(0).toUpperCase() + storedRole.slice(1).toLowerCase();
         
         document.getElementById("user-display-role").textContent = formattedRole;
         document.getElementById("avatar-letter").textContent = storedRole.charAt(0).toUpperCase();
 
-        // SPA Navigation
-        const menuItems = document.querySelectorAll(".menu-item");
+        // Elemen Navigasi SPA
+        const menuItems = document.querySelectorAll(".menu-item, .grid-item:not(.logout)");
         const sections = document.querySelectorAll(".content-section");
         const pageHeaderTitle = document.getElementById("page-header-title");
+        const btnBackMobile = document.getElementById("btn-back-mobile");
 
+        // Fungsi Pindah Halaman SPA
+        function navigateTo(targetId, titleText) {
+            // Bersihkan status aktif di menu sidebar
+            document.querySelectorAll(".menu-item").forEach(menu => menu.classList.remove("active"));
+            sections.forEach(section => section.classList.remove("active"));
+
+            // Aktifkan menu sidebar (jika ada)
+            const sidebarItem = document.querySelector(`.menu-item[data-target="${targetId}"]`);
+            if (sidebarItem) sidebarItem.classList.add("active");
+            
+            // Aktifkan konten yang dipilih
+            const targetSection = document.getElementById(targetId);
+            if (targetSection) targetSection.classList.add("active");
+
+            // Perbarui Judul Header
+            pageHeaderTitle.textContent = titleText;
+
+            // Logika Tombol Back di Mobile
+            if (window.innerWidth <= 768) {
+                if (targetId === "beranda") {
+                    btnBackMobile.style.display = "none";
+                } else {
+                    btnBackMobile.style.display = "block";
+                }
+            }
+        }
+
+        // Event Listener untuk semua menu (Sidebar & Grid Mobile)
         menuItems.forEach(item => {
             item.addEventListener("click", () => {
-                menuItems.forEach(menu => menu.classList.remove("active"));
-                sections.forEach(section => section.classList.remove("active"));
-
-                item.classList.add("active");
-                
                 const targetId = item.getAttribute("data-target");
-                const targetSection = document.getElementById(targetId);
-                if (targetSection) {
-                    targetSection.classList.add("active");
+                
+                // Ambil teks judul: jika dari grid ambil span, jika dari menu ambil teks langsung
+                let titleText = "";
+                if(item.classList.contains('grid-item')) {
+                    titleText = item.querySelector('span').textContent.trim();
+                } else {
+                    titleText = item.textContent.trim();
                 }
 
-                pageHeaderTitle.textContent = item.textContent.trim();
+                navigateTo(targetId, titleText);
             });
         });
 
-        // Logika Logout
-        document.getElementById("btn-logout").addEventListener("click", () => {
+        // Event Listener Tombol Back di Mobile
+        btnBackMobile.addEventListener("click", () => {
+            navigateTo("beranda", "Beranda");
+        });
+
+        // Fungsi Logout (Digunakan oleh tombol desktop & mobile)
+        function performLogout() {
             if (confirm("Apakah Anda yakin ingin keluar dari sistem?")) {
                 sessionStorage.clear();
                 window.location.href = "../index.html";
+            }
+        }
+
+        document.getElementById("btn-logout-desktop").addEventListener("click", performLogout);
+        document.getElementById("btn-logout-mobile").addEventListener("click", performLogout);
+
+        // Pastikan saat resize browser, tombol back mobile disembunyikan jika di desktop
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 768) {
+                btnBackMobile.style.display = "none";
+            } else {
+                const currentActive = document.querySelector(".content-section.active").id;
+                if(currentActive !== "beranda") {
+                    btnBackMobile.style.display = "block";
+                }
             }
         });
     </script>
