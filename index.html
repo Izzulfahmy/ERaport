@@ -3,90 +3,164 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login | E-Raport Fleksibel</title>
+    <title>Login | E-Raport Profesional</title>
     <style>
-        body { 
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-            display: flex; 
-            justify-content: center; 
-            align-items: center; 
-            height: 100vh; 
-            background-color: #f0f2f5; 
+        /* Reset Dasar */
+        * {
+            box-sizing: border-box;
             margin: 0;
+            padding: 0;
+            font-family: 'Inter', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
         }
-        .login-box { 
-            background: white; 
-            padding: 2.5rem; 
-            border-radius: 10px; 
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1); 
+
+        /* Latar Belakang & Layout */
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #f0f4f8 0%, #d9e2ec 100%);
+            color: #334155;
+        }
+
+        /* Card Login Utama */
+        .login-card {
+            background: #ffffff;
             width: 100%;
-            max-width: 320px; 
+            max-width: 380px;
+            padding: 2.5rem;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(15, 23, 42, 0.08);
+            animation: slideUpFade 0.6s ease-out;
         }
-        .login-box h2 {
-            margin-top: 0;
+
+        /* Header Logo & Judul */
+        .login-header {
             text-align: center;
-            color: #333;
+            margin-bottom: 2rem;
         }
-        .form-group { margin-bottom: 1.2rem; }
+        .login-header svg {
+            width: 48px;
+            height: 48px;
+            color: #2563eb;
+            margin-bottom: 10px;
+        }
+        .login-header h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #0f172a;
+            letter-spacing: -0.5px;
+        }
+        .login-header p {
+            font-size: 0.875rem;
+            color: #64748b;
+            margin-top: 4px;
+        }
+
+        /* Grup Input Form */
+        .form-group {
+            margin-bottom: 1.25rem;
+        }
         .form-group label {
             display: block;
+            font-size: 0.875rem;
+            font-weight: 500;
             margin-bottom: 0.5rem;
-            color: #555;
-            font-size: 14px;
+            color: #475569;
         }
-        .form-group input { 
-            width: 100%; 
-            padding: 10px; 
-            box-sizing: border-box; 
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            font-size: 14px;
+        .form-group input {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            font-size: 0.95rem;
+            color: #1e293b;
+            background-color: #f8fafc;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            transition: all 0.2s ease;
         }
-        button { 
-            width: 100%; 
-            padding: 12px; 
-            background-color: #0056b3; 
-            color: white; 
-            border: none; 
-            border-radius: 5px; 
-            font-size: 16px;
-            cursor: pointer; 
-            transition: background 0.3s;
+        .form-group input:focus {
+            outline: none;
+            border-color: #2563eb;
+            background-color: #ffffff;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
         }
-        button:hover { background-color: #004494; }
-        #error-msg { 
-            color: #dc3545; 
-            display: none; 
-            margin-bottom: 15px; 
-            font-size: 13px;
+
+        /* Pesan Error */
+        #error-msg {
+            background-color: #fef2f2;
+            color: #dc2626;
+            padding: 0.75rem;
+            border-radius: 8px;
+            font-size: 0.875rem;
             text-align: center;
+            margin-bottom: 1.5rem;
+            border: 1px solid #fecaca;
+            display: none;
+        }
+
+        /* Tombol Login */
+        .btn-submit {
+            width: 100%;
+            padding: 0.75rem;
+            font-size: 1rem;
+            font-weight: 600;
+            color: #ffffff;
+            background-color: #2563eb;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            margin-top: 0.5rem;
+        }
+        .btn-submit:hover {
+            background-color: #1d4ed8;
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+        }
+        .btn-submit:disabled {
+            background-color: #94a3b8;
+            cursor: not-allowed;
+            box-shadow: none;
+        }
+
+        /* Animasi */
+        @keyframes slideUpFade {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
     </style>
 </head>
 <body>
 
-    <div class="login-box">
-        <h2>E-Raport</h2>
+    <div class="login-card">
+        <div class="login-header">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" />
+            </svg>
+            <h2>E-Raport</h2>
+            <p>Sistem Informasi Penilaian Akademik</p>
+        </div>
+
         <div id="error-msg">Username atau password salah!</div>
-        
-        <div class="form-group">
-            <label for="username">Username</label>
-            <input type="text" id="username" placeholder="Masukkan username" required autocomplete="off">
-        </div>
-        
-        <div class="form-group">
-            <label for="password">Password</label>
-            <input type="password" id="password" placeholder="Masukkan password" required>
-        </div>
-        
-        <button id="login-btn">Masuk</button>
+
+        <form id="login-form">
+            <div class="form-group">
+                <label for="username">Nama Pengguna (Username)</label>
+                <input type="text" id="username" placeholder="Masukkan username" required autocomplete="off">
+            </div>
+            
+            <div class="form-group">
+                <label for="password">Kata Sandi</label>
+                <input type="password" id="password" placeholder="Masukkan kata sandi" required>
+            </div>
+            
+            <button type="submit" id="btn-submit" class="btn-submit">Masuk ke Sistem</button>
+        </form>
     </div>
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
         import { getFirestore, collection, query, where, getDocs } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-        // Konfigurasi Firebase
         const firebaseConfig = {
             apiKey: "AIzaSyCBXA1Atpm8LpDSdAr02OEvuADP2bUT9Gk",
             authDomain: "eraport-87687.firebaseapp.com",
@@ -97,57 +171,54 @@
             measurementId: "G-NWCTMGHZEV"
         };
 
-        // Inisialisasi Firebase & Firestore
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
 
-        // Logika Login
-        document.getElementById('login-btn').addEventListener('click', async () => {
+        // Menangkap event 'submit' pada form
+        document.getElementById('login-form').addEventListener('submit', async (e) => {
+            e.preventDefault(); // Mencegah halaman refresh otomatis
+
             const userVal = document.getElementById('username').value.trim();
             const passVal = document.getElementById('password').value.trim();
             const errorMsg = document.getElementById('error-msg');
-            const loginBtn = document.getElementById('login-btn');
+            const submitBtn = document.getElementById('btn-submit');
             
-            if(!userVal || !passVal) {
-                alert("Harap isi username dan password!");
-                return;
-            }
-
-            loginBtn.textContent = "Memeriksa...";
-            loginBtn.disabled = true;
+            // UI Loading state
+            errorMsg.style.display = "none";
+            submitBtn.textContent = "Memverifikasi data...";
+            submitBtn.disabled = true;
 
             try {
-                // Mencari dokumen di collection 'users' yang cocok
                 const usersRef = collection(db, "users");
                 const q = query(usersRef, where("username", "==", userVal), where("password", "==", passVal));
                 const querySnapshot = await getDocs(q);
 
                 if (!querySnapshot.empty) {
-                    // Berhasil Login
                     let userData = null;
                     querySnapshot.forEach((doc) => {
-                        userData = doc.data(); // Ambil role dsb
+                        userData = doc.data(); 
                     });
 
-                    alert(`Selamat datang, ${userData.role}!`);
-                    
-                    // Simpan state login di Session Storage agar tidak hilang saat di-refresh
+                    // Set state login ke Session Storage
                     sessionStorage.setItem("isLoggedIn", "true");
                     sessionStorage.setItem("role", userData.role);
                     
-                    // Redirect ke halaman dashboard (buat file dashboard.html nantinya)
-                    window.location.href = "dashboardadmin/dashboardadmin.html";
+                    // Path sudah diubah menggunakan titik-slash (./) agar mencari di direktori saat ini
+                    // Pastikan folder 'dashboardadmin' berada satu level dengan file index.html ini
+                    window.location.href = "./dashboardadmin/dashboardadmin.html"; 
                     
                 } else {
-                    // Gagal Login
+                    errorMsg.textContent = "Username atau kata sandi tidak valid!";
                     errorMsg.style.display = "block";
                 }
             } catch (error) {
-                console.error("Error koneksi ke Firestore: ", error);
-                alert("Terjadi masalah koneksi ke server. Cek console log.");
+                console.error("Error Firestore: ", error);
+                errorMsg.textContent = "Gagal terhubung ke server. Periksa koneksi internet Anda.";
+                errorMsg.style.display = "block";
             } finally {
-                loginBtn.textContent = "Masuk";
-                loginBtn.disabled = false;
+                // Kembalikan tombol ke semula jika gagal login
+                submitBtn.textContent = "Masuk ke Sistem";
+                submitBtn.disabled = false;
             }
         });
     </script>
