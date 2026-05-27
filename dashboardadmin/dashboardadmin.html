@@ -30,7 +30,6 @@
             --radius-lg: 12px;
             --radius-md: 8px;
             --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
         }
 
         body {
@@ -141,7 +140,6 @@
             position: relative;
         }
 
-        /* Top Navbar */
         .header {
             background-color: #ffffff;
             padding: 1rem 2.5rem;
@@ -161,7 +159,6 @@
             gap: 15px;
         }
 
-        /* Tombol Back untuk Mobile */
         .btn-back-mobile {
             display: none;
             background: transparent;
@@ -170,10 +167,6 @@
             cursor: pointer;
             padding: 5px;
             border-radius: 5px;
-        }
-
-        .btn-back-mobile:hover {
-            background-color: var(--bg-main);
         }
 
         .current-title {
@@ -190,11 +183,6 @@
             padding: 6px 12px 6px 6px;
             border-radius: 50px;
             cursor: pointer;
-            transition: background-color 0.2s ease;
-        }
-
-        .user-profile:hover {
-            background-color: var(--bg-main);
         }
 
         .avatar-placeholder {
@@ -208,7 +196,6 @@
             justify-content: center;
             border-radius: 50%;
             font-size: 0.95rem;
-            box-shadow: 0 2px 4px rgba(37, 99, 235, 0.2);
         }
 
         .user-name {
@@ -236,7 +223,6 @@
             font-size: 1.5rem;
             font-weight: 700;
             color: var(--text-main);
-            letter-spacing: -0.5px;
             margin-bottom: 6px;
         }
 
@@ -265,35 +251,18 @@
             font-size: 0.95rem;
         }
 
-        /* GRID MENU UNTUK MOBILE DI BERANDA */
         .mobile-grid-menu {
-            display: none; /* Sembunyikan di desktop */
+            display: none;
         }
 
         /* --- RESPONSIVE / MOBILE STYLE --- */
         @media (max-width: 768px) {
-            .sidebar {
-                display: none; /* Sembunyikan sidebar di mobile */
-            }
+            .sidebar { display: none; }
+            .header { padding: 1rem 1.25rem; }
+            .content-section { padding: 1.25rem; }
+            .card { padding: 1.25rem; }
+            .desktop-welcome-card { display: none; }
 
-            .header {
-                padding: 1rem 1.25rem;
-            }
-
-            .content-section {
-                padding: 1.25rem;
-            }
-
-            .card {
-                padding: 1.25rem;
-            }
-
-            /* Sembunyikan card selamat datang di mobile agar fokus ke grid */
-            .desktop-welcome-card {
-                display: none;
-            }
-
-            /* Tampilkan Grid Menu di Halaman Beranda Mobile */
             .mobile-grid-menu {
                 display: grid;
                 grid-template-columns: repeat(2, 1fr);
@@ -314,19 +283,9 @@
                 justify-content: center;
                 align-items: center;
                 gap: 10px;
-                transition: transform 0.1s;
             }
 
-            .grid-item:active {
-                transform: scale(0.97);
-                background-color: var(--primary-light);
-            }
-
-            .grid-item span {
-                font-size: 0.85rem;
-                font-weight: 600;
-                color: var(--text-main);
-            }
+            .grid-item span { font-size: 0.85rem; font-weight: 600; }
             
             .grid-item .icon-circle {
                 width: 40px;
@@ -341,16 +300,11 @@
                 font-size: 1.2rem;
             }
 
-            .grid-item.logout {
-                background-color: #fef2f2;
-                border-color: #fecaca;
-            }
-
+            .grid-item.logout { background-color: #fef2f2; border-color: #fecaca; }
             .grid-item.logout span { color: #dc2626; }
             .grid-item.logout .icon-circle { background-color: #fee2e2; color: #dc2626; }
         }
 
-        /* Animasi */
         @keyframes slideUpFade {
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
@@ -367,8 +321,9 @@
         
         <ul class="sidebar-menu">
             <li class="menu-item active" data-target="beranda">Beranda</li>
-            <li class="menu-item" data-target="profil">Profil Sekolah</li>
-            <li class="menu-item" data-target="tahun-pelajaran">Tahun Pelajaran</li> <li class="menu-item" data-target="data-guru">Data Guru</li>
+            <li class="menu-item" data-target="profil">Profil Sekolah</li> 
+            <li class="menu-item" data-target="tahun-pelajaran">Tahun Pelajaran</li>
+            <li class="menu-item" data-target="data-guru">Data Guru</li>
             <li class="menu-item" data-target="data-siswa">Data Siswa</li>
             <li class="menu-item" data-target="mata-pelajaran">Mata Pelajaran</li>
         </ul>
@@ -403,7 +358,7 @@
             
             <div class="card desktop-welcome-card">
                 <h3>Selamat Datang di Dashboard</h3>
-                <p>Navigasi di sebelah kiri dirancang untuk mempercepat alur kerja Anda. Anda dapat berpindah antar menu secara instan.</p>
+                <p>Navigasi di sebelah kiri dirancang untuk mempercepat alur kerja Anda.</p>
             </div>
 
             <div class="mobile-grid-menu">
@@ -434,17 +389,6 @@
             </div>
         </div>
 
-        <div id="profil" class="content-section">
-            <div class="page-header">
-                <h1>Profil Lembaga</h1>
-                <p>Identitas dasar sekolah untuk pencetakan dokumen kover rapot.</p>
-            </div>
-            <div class="card">
-                <h3>Data Utama Lembaga</h3>
-                <p>Halaman konfigurasi NPSN, Nama Instansi, Kebijakan Kurikulum, serta nama Kepala Sekolah.</p>
-            </div>
-        </div>
-
         <div id="tahun-pelajaran" class="content-section">
             <div class="page-header">
                 <h1>Tahun Pelajaran</h1>
@@ -452,7 +396,7 @@
             </div>
             <div class="card">
                 <h3>Periode Aktif Saat Ini</h3>
-                <p>Atur tahun ajaran (contoh: 2025/2026) dan semester (Ganjil/Genap) yang sedang berjalan agar sinkron dengan input nilai rapot di Firestore.</p>
+                <p>Atur tahun ajaran (contoh: 2025/2026) dan semester (Ganjil/Genap) yang sedang berjalan.</p>
             </div>
         </div>
 
@@ -494,41 +438,40 @@
     <script type="module">
         // Proteksi Halaman
         if (sessionStorage.getItem("isLoggedIn") !== "true") {
-            // Uncomment baris di bawah ini saat di-deploy
+            // Uncomment baris di bawah saat di-deploy 
             // window.location.href = "../index.html"; 
         }
 
-        // Tampilkan Format Nama (Misal: Admin menjadi "Admin")
         const storedRole = sessionStorage.getItem("role") || "Admin";
         const formattedRole = storedRole.charAt(0).toUpperCase() + storedRole.slice(1).toLowerCase();
-        
         document.getElementById("user-display-role").textContent = formattedRole;
         document.getElementById("avatar-letter").textContent = storedRole.charAt(0).toUpperCase();
 
-        // Elemen Navigasi SPA
         const menuItems = document.querySelectorAll(".menu-item, .grid-item:not(.logout)");
         const sections = document.querySelectorAll(".content-section");
         const pageHeaderTitle = document.getElementById("page-header-title");
         const btnBackMobile = document.getElementById("btn-back-mobile");
 
-        // Fungsi Pindah Halaman SPA
         function navigateTo(targetId, titleText) {
-            // Bersihkan status aktif di menu sidebar
+            
+            // --- LOGIKA TRIGGER REDIRECT PROFIL SEKOLAH ---
+            if(targetId === "profil") {
+                window.location.href = "profilsekolah.html";
+                return; // Hentikan script, biarkan browser pindah halaman
+            }
+
+            // --- LOGIKA SPA UNTUK MENU LAINNYA ---
             document.querySelectorAll(".menu-item").forEach(menu => menu.classList.remove("active"));
             sections.forEach(section => section.classList.remove("active"));
 
-            // Aktifkan menu sidebar (jika ada)
             const sidebarItem = document.querySelector(`.menu-item[data-target="${targetId}"]`);
             if (sidebarItem) sidebarItem.classList.add("active");
             
-            // Aktifkan konten yang dipilih
             const targetSection = document.getElementById(targetId);
             if (targetSection) targetSection.classList.add("active");
 
-            // Perbarui Judul Header
             pageHeaderTitle.textContent = titleText;
 
-            // Logika Tombol Back di Mobile
             if (window.innerWidth <= 768) {
                 if (targetId === "beranda") {
                     btnBackMobile.style.display = "none";
@@ -538,29 +481,23 @@
             }
         }
 
-        // Event Listener untuk semua menu (Sidebar & Grid Mobile)
         menuItems.forEach(item => {
             item.addEventListener("click", () => {
                 const targetId = item.getAttribute("data-target");
-                
-                // Ambil teks judul: jika dari grid ambil span, jika dari menu ambil teks langsung
                 let titleText = "";
                 if(item.classList.contains('grid-item')) {
                     titleText = item.querySelector('span').textContent.trim();
                 } else {
                     titleText = item.textContent.trim();
                 }
-
                 navigateTo(targetId, titleText);
             });
         });
 
-        // Event Listener Tombol Back di Mobile
         btnBackMobile.addEventListener("click", () => {
             navigateTo("beranda", "Beranda");
         });
 
-        // Fungsi Logout (Digunakan oleh tombol desktop & mobile)
         function performLogout() {
             if (confirm("Apakah Anda yakin ingin keluar dari sistem?")) {
                 sessionStorage.clear();
@@ -571,7 +508,6 @@
         document.getElementById("btn-logout-desktop").addEventListener("click", performLogout);
         document.getElementById("btn-logout-mobile").addEventListener("click", performLogout);
 
-        // Pastikan saat resize browser, tombol back mobile disembunyikan jika di desktop
         window.addEventListener('resize', () => {
             if (window.innerWidth > 768) {
                 btnBackMobile.style.display = "none";
