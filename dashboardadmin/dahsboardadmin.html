@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Admin | E-Raport Fleksibel</title>
+    <style>
+        /* Reset & Layout Dasar */
+        * { 
+            box-sizing: border-box; 
+            margin: 0; 
+            padding: 0; 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+        }
+        body { 
+            display: flex; 
+            height: 100vh; 
+            overflow: hidden; 
+            background-color: #f1f5f9; 
+        }
+
+        /* Sidebar Styling */
+        .sidebar { 
+            width: 260px; 
+            background-color: #0f172a; 
+            color: #f8fafc; 
+            display: flex; 
+            flex-direction: column; 
+            justify-content: space-between; 
+            padding: 1.5rem 1rem; 
+        }
+        .sidebar-brand { 
+            font-size: 1.3rem; 
+            font-weight: bold; 
+            margin-bottom: 2.5rem; 
+            padding-left: 0.5rem; 
+            color: #38bdf8; 
+            letter-spacing: 0.5px;
+        }
+        .sidebar-menu { 
+            list-style: none; 
+            display: flex; 
+            flex-direction: column; 
+            gap: 0.4rem; 
+        }
+        .menu-item { 
+            display: flex; 
+            align-items: center; 
+            padding: 0.8rem 1rem; 
+            border-radius: 6px; 
+            color: #94a3b8; 
+            text-decoration: none; 
+            cursor: pointer; 
+            transition: all 0.2s ease; 
+        }
+        .menu-item:hover, .menu-item.active { 
+            background-color: #1e293b; 
+            color: #f8fafc; 
+        }
+        .menu-item.active { 
+            border-left: 4px solid #38bdf8; 
+            font-weight: 600;
+        }
+        .logout-btn { 
+            background-color: #ef4444; 
+            color: white; 
+            border: none; 
+            padding: 0.8rem 1rem; 
+            border-radius: 6px; 
+            cursor: pointer; 
+            text-align: left; 
+            width: 100%; 
+            font-weight: 500;
+            transition: background 0.2s; 
+        }
+        .logout-btn:hover { background-color: #dc2626; }
+
+        /* Main Content Container */
+        .main-container { 
+            flex: 1; 
+            display: flex; 
+            flex-direction: column; 
+            overflow-y: auto; 
+        }
+        
+        /* Top Header */
+        .header { 
+            background-color: #ffffff; 
+            padding: 1.2rem 2rem; 
+            border-bottom: 1px solid #e2e8f0; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+        }
+        .current-title { 
+            font-size: 1.1rem; 
+            font-weight: 600; 
+            color: #1e293b; 
+        }
+        .user-info { 
+            font-size: 0.9rem; 
+            color: #64748b; 
+        }
+
+        /* SPA Sections Management */
+        .content-section { 
+            padding: 2rem; 
+            display: none; /* Sembunyikan secara default */
+            animation: fadeIn 0.2s ease-in-out;
+        }
+        .content-section.active { 
+            display: block; /* Tampilkan jika aktif */
+        }
+
+        /* UI Elements / Panels */
+        .card { 
+            background: #ffffff; 
+            padding: 1.5rem; 
+            border-radius: 8px; 
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05); 
+            margin-top: 1.2rem; 
+            border: 1px solid #e2e8f0;
+        }
+        h1 { color: #0f172a; font-size: 1.6rem; font-weight: 700; }
+        h2 { color: #334155; font-size: 1.1rem; margin-bottom: 0.8rem; }
+        p { color: #64748b; font-size: 0.95rem; line-height: 1.5; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(2px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="sidebar">
+        <div>
+            <div class="sidebar-brand">E-Raport Sistem</div>
+            <ul class="sidebar-menu">
+                <li class="menu-item active" data-target="beranda">Beranda</li>
+                <li class="menu-item" data-target="profil">Profil</li>
+                <li class="menu-item" data-target="data-guru">Data Guru</li>
+                <li class="menu-item" data-target="data-siswa">Data Siswa</li>
+            </ul>
+        </div>
+        <button class="logout-btn" id="btn-logout">Keluar Aplikasi</button>
+    </div>
+
+    <div class="main-container">
+        <div class="header">
+            <div class="current-title" id="page-header-title">Beranda</div>
+            <div class="user-info">Login Sebagai: <strong id="user-display-role">Admin</strong></div>
+        </div>
+
+        <div id="beranda" class="content-section active">
+            <h1>Beranda Utama</h1>
+            <div class="card">
+                <h2>Selamat Datang di Panel Kendali E-Raport</h2>
+                <p>Melalui halaman ini, Anda dapat mengonfigurasi komponen penilaian, mengelola data pengguna, dan mengatur fleksibilitas sistem rapor secara dinamis.</p>
+            </div>
+        </div>
+
+        <div id="profil" class="content-section">
+            <h1>Profil Sekolah & Aplikasi</h1>
+            <div class="card">
+                <h2>Identitas Lembaga</h2>
+                <p>Bagian ini digunakan untuk memperbarui data sekolah seperti Nama Sekolah, NPSN, Alamat, dan informasi Kepala Sekolah.</p>
+            </div>
+        </div>
+
+        <div id="data-guru" class="content-section">
+            <h1>Manajemen Data Guru</h1>
+            <div class="card">
+                <h2>Daftar Tenaga Pendidik</h2>
+                <p>Data guru yang terintegrasi langsung dengan Firestore akan ditampilkan dan dikelola di bagian ini.</p>
+                </div>
+        </div>
+
+        <div id="data-siswa" class="content-section">
+            <h1>Manajemen Data Siswa</h1>
+            <div class="card">
+                <h2>Daftar Peserta Didik</h2>
+                <p>Gunakan bagian ini untuk memetakan rombongan belajar (rombel), menambah siswa baru, atau mengunduh template data.</p>
+                </div>
+        </div>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getFirestore } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+        // Konfigurasi Firebase disiapkan untuk operasional data selanjutnya
+        const firebaseConfig = {
+            apiKey: "AIzaSyCBXA1Atpm8LpDSdAr02OEvuADP2bUT9Gk",
+            authDomain: "eraport-87687.firebaseapp.com",
+            projectId: "eraport-87687",
+            storageBucket: "eraport-87687.firebasestorage.app",
+            messagingSenderId: "879847959076",
+            appId: "1:879847959076:web:51ca5db07bb4724b7e06b1",
+            measurementId: "G-NWCTMGHZEV"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        // --- SISTEM PROTEKSI HALAMAN ---
+        // Memastikan user tidak melompati form login index.html
+        if (sessionStorage.getItem("isLoggedIn") !== "true") {
+            alert("Akses ditolak! Silakan login terlebih dahulu.");
+            window.location.href = "../index.html"; 
+        }
+
+        // Tampilkan info peran pengguna dari sessionStorage
+        document.getElementById("user-display-role").textContent = sessionStorage.getItem("role") || "Admin";
+
+
+        // --- LOGIKA UTAMA SPA ROUTING ---
+        const menuItems = document.querySelectorAll(".menu-item");
+        const sections = document.querySelectorAll(".content-section");
+        const pageHeaderTitle = document.getElementById("page-header-title");
+
+        menuItems.forEach(item => {
+            item.addEventListener("click", () => {
+                // 1. Bersihkan status aktif dari semua menu dan panel konten
+                menuItems.forEach(i => i.classList.remove("active"));
+                sections.forEach(s => s.classList.remove("active"));
+
+                // 2. Set menu yang diklik menjadi aktif
+                item.classList.add("active");
+                
+                // 3. Ambil target id dari atribut data-target dan tampilkan panelnya
+                const targetId = item.getAttribute("data-target");
+                document.getElementById(targetId).classList.add("active");
+
+                // 4. Perbarui title bar bagian atas agar sesuai menu
+                pageHeaderTitle.textContent = item.textContent;
+            });
+        });
+
+
+        // --- LOGIKA KELUAR / LOGOUT ---
+        document.getElementById("btn-logout").addEventListener("click", () => {
+            if (confirm("Apakah Anda yakin ingin keluar dari aplikasi?")) {
+                sessionStorage.clear(); // Hapus token session
+                window.location.href = "../index.html"; // Kembali ke halaman login utama
+            }
+        });
+    </script>
+</body>
+</html>
