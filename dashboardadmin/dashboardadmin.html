@@ -9,305 +9,54 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     
     <style>
-        /* Reset & Variabel Sistem */
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Inter', system-ui, -apple-system, sans-serif;
-        }
-
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; }
         :root {
-            --primary: #2563eb;
-            --primary-light: #eff6ff;
-            --sidebar-bg: #0f172a;
-            --sidebar-hover: #1e293b;
-            --sidebar-text: #94a3b8;
-            --bg-main: #f8fafc;
-            --text-main: #0f172a;
-            --text-muted: #64748b;
-            --border: #e2e8f0;
-            --radius-lg: 12px;
-            --radius-md: 8px;
-            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --primary: #2563eb; --primary-light: #eff6ff; --sidebar-bg: #0f172a; 
+            --sidebar-hover: #1e293b; --sidebar-text: #94a3b8; --bg-main: #f8fafc; 
+            --text-main: #0f172a; --text-muted: #64748b; --border: #e2e8f0;
+            --radius-lg: 12px; --radius-md: 8px; --shadow-sm: 0 1px 2px 0 rgba(0,0,0,0.05);
         }
 
-        body {
-            display: flex;
-            height: 100vh;
-            overflow: hidden;
-            background-color: var(--bg-main);
-            color: var(--text-main);
-            -webkit-font-smoothing: antialiased;
-        }
+        body { display: flex; height: 100vh; overflow: hidden; background-color: var(--bg-main); color: var(--text-main); }
 
-        /* --- SIDEBAR KIRI (DESKTOP) --- */
-        .sidebar {
-            width: 260px;
-            background-color: var(--sidebar-bg);
-            color: #ffffff;
-            display: flex;
-            flex-direction: column;
-            padding: 2rem 1.25rem;
-            flex-shrink: 0;
-            border-right: 1px solid rgba(255, 255, 255, 0.05);
-            transition: transform 0.3s ease;
-        }
+        /* --- SIDEBAR --- */
+        .sidebar { width: 260px; background-color: var(--sidebar-bg); display: flex; flex-direction: column; padding: 2rem 1.25rem; flex-shrink: 0; }
+        .sidebar-brand { margin-bottom: 3rem; padding-left: 0.75rem; }
+        .sidebar-brand .title { font-size: 1.25rem; font-weight: 700; color: #ffffff; display: block; }
+        .sidebar-brand .subtitle { font-size: 0.75rem; color: var(--primary); font-weight: 600; text-transform: uppercase; margin-top: 4px; display: block; }
+        
+        .sidebar-menu { list-style: none; display: flex; flex-direction: column; gap: 0.25rem; flex-grow: 1; }
+        .menu-item { display: block; padding: 0.85rem 1rem; border-radius: var(--radius-md); color: var(--sidebar-text); cursor: pointer; font-weight: 500; font-size: 0.95rem; transition: 0.2s; }
+        .menu-item:hover { background-color: var(--sidebar-hover); color: #ffffff; padding-left: 1.25rem; }
+        .menu-item.active { background-color: var(--sidebar-hover); color: #ffffff; font-weight: 600; border-left: 4px solid var(--primary); border-radius: 4px var(--radius-md) var(--radius-md) 4px; }
+        
+        .logout-btn { background: transparent; color: #f87171; border: 1px solid rgba(239, 68, 68, 0.2); padding: 0.85rem 1rem; border-radius: var(--radius-md); cursor: pointer; font-weight: 500; text-align: left; transition: 0.2s; margin-top: auto; }
+        .logout-btn:hover { background: #ef4444; color: #ffffff; }
 
-        .sidebar-brand {
-            margin-bottom: 3rem;
-            padding-left: 0.75rem;
-        }
+        /* --- KONTEN UTAMA --- */
+        .main-container { flex: 1; display: flex; flex-direction: column; height: 100vh; }
+        
+        .header { background-color: #ffffff; padding: 1rem 2.5rem; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; flex-shrink: 0; }
+        .current-title { font-size: 1.25rem; font-weight: 600; }
+        .user-profile { display: flex; align-items: center; gap: 12px; }
+        .avatar-placeholder { width: 36px; height: 36px; background: linear-gradient(135deg, var(--primary), #1d4ed8); color: #ffffff; font-weight: 600; display: flex; align-items: center; justify-content: center; border-radius: 50%; }
+        .user-name { font-size: 0.9rem; font-weight: 600; }
 
-        .sidebar-brand .title {
-            font-size: 1.25rem;
-            font-weight: 700;
-            letter-spacing: -0.5px;
-            color: #ffffff;
-            display: block;
-        }
+        /* Area Konten Internal */
+        .content-section { padding: 2.5rem; display: none; overflow-y: auto; flex-grow: 1; }
+        .content-section.active { display: block; }
+        
+        .page-header { margin-bottom: 2rem; }
+        .page-header h1 { font-size: 1.5rem; font-weight: 700; margin-bottom: 6px; }
+        .page-header p { font-size: 0.95rem; color: var(--text-muted); }
+        .card { background: #ffffff; padding: 2rem; border-radius: var(--radius-lg); border: 1px solid var(--border); box-shadow: var(--shadow-sm); }
 
-        .sidebar-brand .subtitle {
-            font-size: 0.75rem;
-            color: var(--primary);
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-top: 4px;
-            display: block;
-        }
-
-        .sidebar-menu {
-            list-style: none;
-            display: flex;
-            flex-direction: column;
-            gap: 0.25rem;
+        /* Area Jendela Iframe (Untuk File Eksternal) */
+        #external-frame {
+            width: 100%;
             flex-grow: 1;
-        }
-
-        .menu-item {
-            display: block;
-            padding: 0.85rem 1rem;
-            border-radius: var(--radius-md);
-            color: var(--sidebar-text);
-            text-decoration: none;
-            cursor: pointer;
-            font-weight: 500;
-            font-size: 0.95rem;
-            transition: all 0.2s ease;
-        }
-
-        .menu-item:hover {
-            background-color: var(--sidebar-hover);
-            color: #ffffff;
-            padding-left: 1.25rem;
-        }
-
-        .menu-item.active {
-            background-color: var(--sidebar-hover);
-            color: #ffffff;
-            font-weight: 600;
-            border-left: 4px solid var(--primary);
-            border-radius: 4px var(--radius-md) var(--radius-md) 4px;
-        }
-
-        .logout-btn {
-            background-color: transparent;
-            color: #f87171;
-            border: 1px solid rgba(239, 68, 68, 0.2);
-            padding: 0.85rem 1rem;
-            border-radius: var(--radius-md);
-            cursor: pointer;
-            font-weight: 500;
-            font-size: 0.95rem;
-            text-align: left;
-            transition: all 0.2s ease;
-            margin-top: auto;
-        }
-
-        .logout-btn:hover {
-            background-color: #ef4444;
-            color: #ffffff;
-            border-color: #ef4444;
-        }
-
-        /* --- KONTEN UTAMA KANAN --- */
-        .main-container {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            overflow-y: auto;
-            position: relative;
-        }
-
-        .header {
-            background-color: #ffffff;
-            padding: 1rem 2.5rem;
-            border-bottom: 1px solid var(--border);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-shrink: 0;
-            position: sticky;
-            top: 0;
-            z-index: 10;
-        }
-
-        .header-left {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .btn-back-mobile {
-            display: none;
-            background: transparent;
             border: none;
-            color: var(--text-main);
-            cursor: pointer;
-            padding: 5px;
-            border-radius: 5px;
-        }
-
-        .current-title {
-            font-size: 1.25rem;
-            font-weight: 600;
-            color: var(--text-main);
-            letter-spacing: -0.5px;
-        }
-
-        .user-profile {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 6px 12px 6px 6px;
-            border-radius: 50px;
-            cursor: pointer;
-        }
-
-        .avatar-placeholder {
-            width: 36px;
-            height: 36px;
-            background: linear-gradient(135deg, var(--primary), #1d4ed8);
-            color: #ffffff;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            font-size: 0.95rem;
-        }
-
-        .user-name {
-            font-size: 0.9rem;
-            font-weight: 600;
-            color: var(--text-main);
-        }
-
-        /* SPA Layout Konten */
-        .content-section {
-            padding: 2.5rem;
-            display: none;
-            animation: slideUpFade 0.3s ease-out;
-        }
-
-        .content-section.active {
-            display: block;
-        }
-
-        .page-header {
-            margin-bottom: 2rem;
-        }
-
-        .page-header h1 {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--text-main);
-            margin-bottom: 6px;
-        }
-
-        .page-header p {
-            font-size: 0.95rem;
-            color: var(--text-muted);
-        }
-
-        .card {
-            background: #ffffff;
-            padding: 2rem;
-            border-radius: var(--radius-lg);
-            border: 1px solid var(--border);
-            box-shadow: var(--shadow-sm);
-        }
-
-        .card h3 {
-            font-size: 1.1rem;
-            margin-bottom: 12px;
-            color: var(--text-main);
-        }
-
-        .card p {
-            color: var(--text-muted);
-            line-height: 1.6;
-            font-size: 0.95rem;
-        }
-
-        .mobile-grid-menu {
-            display: none;
-        }
-
-        /* --- RESPONSIVE / MOBILE STYLE --- */
-        @media (max-width: 768px) {
-            .sidebar { display: none; }
-            .header { padding: 1rem 1.25rem; }
-            .content-section { padding: 1.25rem; }
-            .card { padding: 1.25rem; }
-            .desktop-welcome-card { display: none; }
-
-            .mobile-grid-menu {
-                display: grid;
-                grid-template-columns: repeat(2, 1fr);
-                gap: 1rem;
-                margin-top: 1rem;
-            }
-
-            .grid-item {
-                background-color: #ffffff;
-                border: 1px solid var(--border);
-                border-radius: var(--radius-lg);
-                padding: 1.5rem 1rem;
-                text-align: center;
-                box-shadow: var(--shadow-sm);
-                cursor: pointer;
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
-                gap: 10px;
-            }
-
-            .grid-item span { font-size: 0.85rem; font-weight: 600; }
-            
-            .grid-item .icon-circle {
-                width: 40px;
-                height: 40px;
-                background-color: var(--primary-light);
-                color: var(--primary);
-                border-radius: 50%;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                font-weight: bold;
-                font-size: 1.2rem;
-            }
-
-            .grid-item.logout { background-color: #fef2f2; border-color: #fecaca; }
-            .grid-item.logout span { color: #dc2626; }
-            .grid-item.logout .icon-circle { background-color: #fee2e2; color: #dc2626; }
-        }
-
-        @keyframes slideUpFade {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
+            display: none; /* Sembunyikan secara default */
         }
     </style>
 </head>
@@ -320,30 +69,19 @@
         </div>
         
         <ul class="sidebar-menu">
-            <li class="menu-item active" data-target="beranda">Beranda</li>
-            <li class="menu-item" data-target="profil">Profil Sekolah</li> 
-            <li class="menu-item" data-target="tahun-pelajaran">Tahun Pelajaran</li>
-            <li class="menu-item" data-target="data-guru">Data Guru</li>
-            <li class="menu-item" data-target="data-siswa">Data Siswa</li>
-            <li class="menu-item" data-target="mata-pelajaran">Mata Pelajaran</li>
+            <li class="menu-item active" data-type="internal" data-target="beranda">Beranda</li>
+            <li class="menu-item" data-type="external" data-target="profilsekolah.html">Profil Sekolah</li>
+            <li class="menu-item" data-type="internal" data-target="tahun-pelajaran">Tahun Pelajaran</li>
+            <li class="menu-item" data-type="internal" data-target="data-guru">Data Guru</li>
         </ul>
 
-        <button class="logout-btn" id="btn-logout-desktop">Keluar Sistem</button>
+        <button class="logout-btn" id="btn-logout">Keluar Sistem</button>
     </div>
 
     <div class="main-container">
         
         <div class="header">
-            <div class="header-left">
-                <button class="btn-back-mobile" id="btn-back-mobile">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <line x1="19" y1="12" x2="5" y2="12"></line>
-                        <polyline points="12 19 5 12 12 5"></polyline>
-                    </svg>
-                </button>
-                <div class="current-title" id="page-header-title">Beranda</div>
-            </div>
-            
+            <div class="current-title" id="page-header-title">Beranda</div>
             <div class="user-profile">
                 <div class="avatar-placeholder" id="avatar-letter">A</div>
                 <div class="user-name" id="user-display-role">Admin</div>
@@ -355,167 +93,70 @@
                 <h1>Sistem Manajemen</h1>
                 <p>Pusat data instansi berbasis Cloud Firestore.</p>
             </div>
-            
-            <div class="card desktop-welcome-card">
-                <h3>Selamat Datang di Dashboard</h3>
-                <p>Navigasi di sebelah kiri dirancang untuk mempercepat alur kerja Anda.</p>
-            </div>
-
-            <div class="mobile-grid-menu">
-                <div class="grid-item" data-target="profil">
-                    <div class="icon-circle">P</div>
-                    <span>Profil Sekolah</span>
-                </div>
-                <div class="grid-item" data-target="tahun-pelajaran">
-                    <div class="icon-circle">T</div>
-                    <span>Tahun Pelajaran</span>
-                </div>
-                <div class="grid-item" data-target="data-guru">
-                    <div class="icon-circle">G</div>
-                    <span>Data Guru</span>
-                </div>
-                <div class="grid-item" data-target="data-siswa">
-                    <div class="icon-circle">S</div>
-                    <span>Data Siswa</span>
-                </div>
-                <div class="grid-item" data-target="mata-pelajaran">
-                    <div class="icon-circle">M</div>
-                    <span>Mata Pelajaran</span>
-                </div>
-                <div class="grid-item logout" id="btn-logout-mobile">
-                    <div class="icon-circle">X</div>
-                    <span>Keluar</span>
-                </div>
+            <div class="card">
+                <h3>Selamat Datang</h3>
+                <p>Silakan klik menu Profil Sekolah untuk melihat bagaimana jendela eksternal bekerja tanpa reload halaman.</p>
             </div>
         </div>
 
         <div id="tahun-pelajaran" class="content-section">
-            <div class="page-header">
-                <h1>Tahun Pelajaran</h1>
-                <p>Manajemen periode akademik dan semester aktif.</p>
-            </div>
-            <div class="card">
-                <h3>Periode Aktif Saat Ini</h3>
-                <p>Atur tahun ajaran (contoh: 2025/2026) dan semester (Ganjil/Genap) yang sedang berjalan.</p>
-            </div>
+            <div class="page-header"><h1>Tahun Pelajaran</h1></div>
+            <div class="card"><p>Pengaturan periode aktif.</p></div>
         </div>
 
         <div id="data-guru" class="content-section">
-            <div class="page-header">
-                <h1>Data Guru</h1>
-                <p>Kelola data pendidik dan pembagian tugas wali kelas.</p>
-            </div>
-            <div class="card">
-                <h3>Direktori Tenaga Pendidik</h3>
-                <p>Daftar guru aktif yang tersimpan dalam basis data sistem terpadu.</p>
-            </div>
+            <div class="page-header"><h1>Data Guru</h1></div>
+            <div class="card"><p>Manajemen tenaga pendidik.</p></div>
         </div>
 
-        <div id="data-siswa" class="content-section">
-            <div class="page-header">
-                <h1>Data Siswa</h1>
-                <p>Kelola data peserta didik dan manajemen rombongan belajar.</p>
-            </div>
-            <div class="card">
-                <h3>Daftar Murid Aktif</h3>
-                <p>Gunakan panel ini untuk mengunggah data siswa baru atau memetakan rombel kelas.</p>
-            </div>
-        </div>
-
-        <div id="mata-pelajaran" class="content-section">
-            <div class="page-header">
-                <h1>Mata Pelajaran</h1>
-                <p>Konfigurasi daftar mata pelajaran, kelompok kurikulum, dan nilai ketuntasan.</p>
-            </div>
-            <div class="card">
-                <h3>Struktur Kurikulum</h3>
-                <p>Pengaturan muatan pelajaran yang digunakan dalam periode akademik saat ini.</p>
-            </div>
-        </div>
+        <iframe id="external-frame" src=""></iframe>
 
     </div>
 
-    <script type="module">
-        // Proteksi Halaman
-        if (sessionStorage.getItem("isLoggedIn") !== "true") {
-            // Uncomment baris di bawah saat di-deploy 
-            // window.location.href = "../index.html"; 
-        }
-
+    <script>
+        // Setup User Info
         const storedRole = sessionStorage.getItem("role") || "Admin";
-        const formattedRole = storedRole.charAt(0).toUpperCase() + storedRole.slice(1).toLowerCase();
-        document.getElementById("user-display-role").textContent = formattedRole;
+        document.getElementById("user-display-role").textContent = storedRole.charAt(0).toUpperCase() + storedRole.slice(1);
         document.getElementById("avatar-letter").textContent = storedRole.charAt(0).toUpperCase();
 
-        const menuItems = document.querySelectorAll(".menu-item, .grid-item:not(.logout)");
+        // Routing Logic (SPA + Iframe)
+        const menuItems = document.querySelectorAll(".menu-item");
         const sections = document.querySelectorAll(".content-section");
+        const externalFrame = document.getElementById("external-frame");
         const pageHeaderTitle = document.getElementById("page-header-title");
-        const btnBackMobile = document.getElementById("btn-back-mobile");
-
-        function navigateTo(targetId, titleText) {
-            
-            // --- LOGIKA TRIGGER REDIRECT PROFIL SEKOLAH ---
-            if(targetId === "profil") {
-                window.location.href = "profilsekolah.html";
-                return; // Hentikan script, biarkan browser pindah halaman
-            }
-
-            // --- LOGIKA SPA UNTUK MENU LAINNYA ---
-            document.querySelectorAll(".menu-item").forEach(menu => menu.classList.remove("active"));
-            sections.forEach(section => section.classList.remove("active"));
-
-            const sidebarItem = document.querySelector(`.menu-item[data-target="${targetId}"]`);
-            if (sidebarItem) sidebarItem.classList.add("active");
-            
-            const targetSection = document.getElementById(targetId);
-            if (targetSection) targetSection.classList.add("active");
-
-            pageHeaderTitle.textContent = titleText;
-
-            if (window.innerWidth <= 768) {
-                if (targetId === "beranda") {
-                    btnBackMobile.style.display = "none";
-                } else {
-                    btnBackMobile.style.display = "block";
-                }
-            }
-        }
 
         menuItems.forEach(item => {
             item.addEventListener("click", () => {
-                const targetId = item.getAttribute("data-target");
-                let titleText = "";
-                if(item.classList.contains('grid-item')) {
-                    titleText = item.querySelector('span').textContent.trim();
-                } else {
-                    titleText = item.textContent.trim();
+                // 1. Bersihkan status menu
+                menuItems.forEach(menu => menu.classList.remove("active"));
+                item.classList.add("active");
+
+                // 2. Ambil data target
+                const target = item.getAttribute("data-target");
+                const type = item.getAttribute("data-type");
+                pageHeaderTitle.textContent = item.textContent.trim();
+
+                // 3. Matikan semua tampilan
+                sections.forEach(sec => sec.classList.remove("active"));
+                externalFrame.style.display = "none";
+
+                // 4. Logika Tampilan
+                if (type === "internal") {
+                    // Tampilkan div internal
+                    document.getElementById(target).classList.add("active");
+                } else if (type === "external") {
+                    // Tampilkan Iframe dan ubah src (sumber) ke file yang dituju
+                    externalFrame.src = target;
+                    externalFrame.style.display = "block";
                 }
-                navigateTo(targetId, titleText);
             });
         });
 
-        btnBackMobile.addEventListener("click", () => {
-            navigateTo("beranda", "Beranda");
-        });
-
-        function performLogout() {
-            if (confirm("Apakah Anda yakin ingin keluar dari sistem?")) {
+        // Logout
+        document.getElementById("btn-logout").addEventListener("click", () => {
+            if (confirm("Keluar dari aplikasi?")) {
                 sessionStorage.clear();
                 window.location.href = "../index.html";
-            }
-        }
-
-        document.getElementById("btn-logout-desktop").addEventListener("click", performLogout);
-        document.getElementById("btn-logout-mobile").addEventListener("click", performLogout);
-
-        window.addEventListener('resize', () => {
-            if (window.innerWidth > 768) {
-                btnBackMobile.style.display = "none";
-            } else {
-                const currentActive = document.querySelector(".content-section.active").id;
-                if(currentActive !== "beranda") {
-                    btnBackMobile.style.display = "block";
-                }
             }
         });
     </script>
