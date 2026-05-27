@@ -3,41 +3,74 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profil Sekolah | Skoola E-Raport</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     
     <style>
+        /* Reset & Variabel Sistem */
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; }
-        
-        /* Warna latar disamakan dengan konten dashboard */
-        body { background-color: #f8fafc; color: #0f172a; padding: 2.5rem; }
-
         :root {
             --primary: #2563eb; --primary-hover: #1d4ed8; --primary-light: #eff6ff;
-            --text-main: #0f172a; --text-muted: #64748b; --border: #e2e8f0;
-            --radius-lg: 12px; --radius-md: 8px;
+            --sidebar-bg: #0f172a; --sidebar-hover: #1e293b; --sidebar-text: #94a3b8;
+            --bg-main: #f8fafc; --text-main: #0f172a; --text-muted: #64748b;
+            --border: #e2e8f0; --radius-lg: 12px; --radius-md: 8px;
             --success: #10b981; --danger: #ef4444; --danger-light: #fef2f2;
         }
 
+        body { display: flex; height: 100vh; overflow: hidden; background-color: var(--bg-main); color: var(--text-main); }
+
+        /* --- SIDEBAR KIRI --- */
+        .sidebar { width: 260px; background-color: var(--sidebar-bg); display: flex; flex-direction: column; padding: 2rem 1.25rem; flex-shrink: 0; transition: transform 0.3s ease;}
+        .sidebar-brand { margin-bottom: 3rem; padding-left: 0.75rem; }
+        .sidebar-brand .title { font-size: 1.25rem; font-weight: 700; color: #ffffff; display: block; }
+        .sidebar-brand .subtitle { font-size: 0.75rem; color: var(--primary); font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin-top: 4px; display: block; }
+        .sidebar-menu { list-style: none; display: flex; flex-direction: column; gap: 0.25rem; flex-grow: 1; }
+        
+        .menu-item { display: block; padding: 0.85rem 1rem; border-radius: var(--radius-md); color: var(--sidebar-text); text-decoration: none; font-weight: 500; font-size: 0.95rem; transition: 0.2s; }
+        .menu-item:hover { background-color: var(--sidebar-hover); color: #ffffff; padding-left: 1.25rem; }
+        .menu-item.active { background-color: var(--sidebar-hover); color: #ffffff; font-weight: 600; border-left: 4px solid var(--primary); border-radius: 4px var(--radius-md) var(--radius-md) 4px; }
+        
+        .logout-btn { background: transparent; color: #f87171; border: 1px solid rgba(239, 68, 68, 0.2); padding: 0.85rem 1rem; border-radius: var(--radius-md); cursor: pointer; font-weight: 500; text-align: left; transition: 0.2s; margin-top: auto; }
+        .logout-btn:hover { background: var(--danger); color: #fff; }
+
+        /* --- KONTEN UTAMA --- */
+        .main-container { flex: 1; display: flex; flex-direction: column; overflow-y: auto; position: relative;}
+        
+        /* HEADER */
+        .header { background: #fff; padding: 1rem 2.5rem; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 10; }
+        .header-left { display: flex; align-items: center; gap: 15px; }
+        .btn-back-mobile { display: none; background: transparent; border: none; color: var(--text-main); cursor: pointer; padding: 5px; border-radius: 5px; }
+        .btn-back-mobile:hover { background-color: var(--bg-main); }
+        .current-title { font-size: 1.25rem; font-weight: 600; letter-spacing: -0.5px; }
+        
+        /* PROFIL USER */
+        .user-profile { display: flex; align-items: center; gap: 12px; }
+        .avatar-placeholder { width: 36px; height: 36px; background: linear-gradient(135deg, var(--primary), #1d4ed8); color: #fff; font-weight: 600; display: flex; align-items: center; justify-content: center; border-radius: 50%; }
+        .user-name { font-size: 0.9rem; font-weight: 600; }
+
+        /* SECTION KONTEN */
+        .content-section { padding: 2.5rem; animation: slideUp 0.3s ease-out; }
         .page-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 2rem; }
         .page-header h1 { font-size: 1.5rem; font-weight: 700; margin-bottom: 6px; }
         .page-header p { font-size: 0.95rem; color: var(--text-muted); }
 
-        .card { background: #fff; padding: 2rem; border-radius: var(--radius-lg); border: 1px solid var(--border); box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
-        .section-title { font-size: 1.05rem; font-weight: 700; color: var(--primary); margin-bottom: 1.25rem; padding-bottom: 0.5rem; border-bottom: 2px solid var(--primary-light); margin-top: 1.5rem; }
+        /* CARD & FORM */
+        .card { background: #fff; padding: 2rem; border-radius: var(--radius-lg); border: 1px solid var(--border); box-shadow: 0 1px 2px rgba(0,0,0,0.05); margin-bottom: 2rem; }
+        .section-title { font-size: 1.05rem; font-weight: 700; color: var(--primary); margin-bottom: 1.25rem; padding-bottom: 0.5rem; border-bottom: 2px solid var(--primary-light); margin-top: 1.5rem;}
         .section-title:first-child { margin-top: 0; }
         
         .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 1rem; }
         .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
         .form-group label { font-size: 0.85rem; font-weight: 600; color: var(--text-muted); }
-        
-        .form-control { padding: 0.75rem 1rem; border: 1px solid var(--border); border-radius: var(--radius-md); font-size: 0.95rem; color: var(--text-main); background: #fff; transition: 0.2s; width: 100%; }
+        .form-control { padding: 0.75rem 1rem; border: 1px solid var(--border); border-radius: var(--radius-md); font-size: 0.95rem; color: var(--text-main); background: #fff; transition: 0.2s; width: 100%;}
         .form-control:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px rgba(37,99,235,0.1); }
         
-        /* Tampilan Read Only */
+        /* Form Read Only Mode */
         .form-control:disabled { background: transparent; border-color: transparent; padding-left: 0; font-weight: 500; color: var(--text-main); opacity: 1; -webkit-text-fill-color: var(--text-main); }
 
+        /* TOMBOL AKSI */
         .action-buttons { display: flex; gap: 1rem; }
         .btn { padding: 0.65rem 1.25rem; border-radius: var(--radius-md); font-weight: 600; font-size: 0.9rem; cursor: pointer; display: flex; align-items: center; gap: 8px; border: none; transition: 0.2s; }
         .btn-edit { background: var(--primary-light); color: var(--primary); }
@@ -47,145 +80,188 @@
         .btn-cancel { background: var(--danger-light); color: var(--danger); display: none; }
         .btn-cancel:hover { background: #fee2e2; }
 
+        /* STATUS BANNER */
         #status-banner { display: none; padding: 1rem; border-radius: var(--radius-md); margin-bottom: 1.5rem; font-weight: 500; font-size: 0.9rem; }
         .status-success { background: #d1fae5; color: #065f46; border: 1px solid #a7f3d0; }
         .status-error { background: #fee2e2; color: #991b1b; border: 1px solid #fecaca; }
-        
-        /* Mobile responsive form */
+
+        @keyframes slideUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* --- RESPONSIVE MOBILE --- */
         @media (max-width: 768px) {
-            body { padding: 1.25rem; }
+            .sidebar { display: none; }
+            .header { padding: 1rem 1.25rem; }
+            .content-section { padding: 1.25rem; }
+            .card { padding: 1.25rem; }
             .form-grid { grid-template-columns: 1fr; gap: 1rem; }
             .page-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
-            .action-buttons { width: 100%; }
-            .btn { flex: 1; justify-content: center; }
+            .action-buttons { width: 100%; display: flex; flex-wrap: wrap;}
+            .btn { flex: 1; justify-content: center; min-width: 120px;}
+            
+            /* Tampilkan tombol back di mobile */
+            .btn-back-mobile { display: block; }
         }
     </style>
 </head>
 <body>
 
-    <div class="page-header">
-        <div>
-            <h1>Informasi Profil Sekolah</h1>
-            <p>Konfigurasi data identitas utama, lokasi, dan kontak institusi.</p>
+    <div class="sidebar">
+        <div class="sidebar-brand">
+            <span class="title">Skoola E-Raport</span>
+            <span class="subtitle">Dashboard Admin</span>
         </div>
-        <div class="action-buttons">
-            <button class="btn btn-edit" id="btn-edit">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" /></svg>
-                Edit Data
-            </button>
-            <button class="btn btn-cancel" id="btn-cancel">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
-                Batal
-            </button>
-            <button class="btn btn-save" id="btn-save">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>
-                Simpan Perubahan
-            </button>
-        </div>
+        
+        <ul class="sidebar-menu">
+            <li><a href="dashboardadmin.html" class="menu-item">Beranda</a></li>
+            <li><a href="profilsekolah.html" class="menu-item active">Profil Sekolah</a></li>
+            <li><a href="#" class="menu-item">Tahun Pelajaran</a></li>
+            <li><a href="#" class="menu-item">Data Guru</a></li>
+            <li><a href="#" class="menu-item">Data Siswa</a></li>
+            <li><a href="#" class="menu-item">Mata Pelajaran</a></li>
+        </ul>
+        <button class="logout-btn" id="btn-logout">Keluar Sistem</button>
     </div>
 
-    <div id="status-banner"></div>
-
-    <div class="card">
-        <form id="form-profil">
-            
-            <div class="section-title">1. Identitas Sekolah</div>
-            <div class="form-grid">
-                <div class="form-group">
-                    <label>Nama Instansi</label>
-                    <input type="text" id="nama_instansi" class="form-control" placeholder="Contoh: SD Negeri 1 Jember" disabled>
-                </div>
-                <div class="form-group">
-                    <label>Nomor Pokok Sekolah Nasional (NPSN)</label>
-                    <input type="text" id="npsn" class="form-control" placeholder="Contoh: 20512345" disabled>
-                </div>
-                <div class="form-group">
-                    <label>Status Sekolah</label>
-                    <select id="status_sekolah" class="form-control" disabled>
-                        <option value="">- Pilih Status -</option>
-                        <option value="NEGERI">NEGERI</option>
-                        <option value="SWASTA">SWASTA</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>Bentuk Pendidikan</label>
-                    <select id="bentuk_pendidikan" class="form-control" disabled>
-                        <option value="">- Pilih Bentuk Pendidikan -</option>
-                        <option value="SD">SD</option>
-                        <option value="MI">MI</option>
-                        <option value="SMP">SMP</option>
-                        <option value="MTS">MTS</option>
-                        <option value="SMA">SMA</option>
-                        <option value="SMK">SMK</option>
-                        <option value="MA">MA</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>Naungan</label>
-                    <input type="text" id="naungan" class="form-control" placeholder="Contoh: Kementerian Pendidikan dan Kebudayaan" disabled>
-                </div>
-                <div class="form-group">
-                    <label>Nama Kepala Sekolah</label>
-                    <input type="text" id="kepala_sekolah" class="form-control" placeholder="Masukkan nama beserta gelar" disabled>
-                </div>
-            </div>
-
-            <div class="section-title">2. Detail Lokasi</div>
-            <div class="form-grid">
-                <div class="form-group">
-                    <label>Alamat / Jalan</label>
-                    <input type="text" id="alamat" class="form-control" placeholder="Contoh: Jl. Cempaka No. 13" disabled>
-                </div>
-                <div class="form-group">
-                    <label>Desa / Kelurahan</label>
-                    <input type="text" id="desa" class="form-control" placeholder="Contoh: Dukuh Dempok" disabled>
-                </div>
-                <div class="form-group">
-                    <label>Kecamatan</label>
-                    <input type="text" id="kecamatan" class="form-control" placeholder="Contoh: Kec. Wuluhan" disabled>
-                </div>
-                <div class="form-group">
-                    <label>Kabupaten / Kota</label>
-                    <input type="text" id="kabupaten" class="form-control" placeholder="Contoh: Kab. Jember" disabled>
-                </div>
-                <div class="form-group">
-                    <label>Provinsi</label>
-                    <input type="text" id="provinsi" class="form-control" placeholder="Contoh: Prov. Jawa Timur" disabled>
-                </div>
-            </div>
-
-            <div class="section-title">3. Kontak & Media Sosial</div>
-            <div class="form-grid">
-                <div class="form-group">
-                    <label>Nomor Kontak / Telepon</label>
-                    <input type="text" id="kontak" class="form-control" placeholder="Contoh: 0331-123456 / 0812345678" disabled>
-                </div>
-                <div class="form-group">
-                    <label>Website Resmi</label>
-                    <input type="text" id="website" class="form-control" placeholder="Contoh: www.sekolahanda.sch.id" disabled>
-                </div>
-                <div class="form-group">
-                    <label>Instagram</label>
-                    <input type="text" id="ig" class="form-control" placeholder="Contoh: @sekolahku" disabled>
-                </div>
-                <div class="form-group">
-                    <label>TikTok</label>
-                    <input type="text" id="tiktok" class="form-control" placeholder="Contoh: @sekolahku.official" disabled>
-                </div>
-                <div class="form-group">
-                    <label>Facebook Halaman</label>
-                    <input type="text" id="facebook" class="form-control" placeholder="Contoh: SD Negeri 1 Jember" disabled>
-                </div>
+    <div class="main-container">
+        <div class="header">
+            <div class="header-left">
+                <button class="btn-back-mobile" id="btn-back-mobile" onclick="window.location.href='dashboardadmin.html'">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="19" y1="12" x2="5" y2="12"></line>
+                        <polyline points="12 19 5 12 12 5"></polyline>
+                    </svg>
+                </button>
+                <div class="current-title">Profil Sekolah</div>
             </div>
             
-        </form>
+            <div class="user-profile">
+                <div class="avatar-placeholder" id="avatar-letter">A</div>
+                <div class="user-name" id="user-display-role">Admin</div>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <div class="page-header">
+                <div>
+                    <h1>Informasi Identitas Lembaga</h1>
+                    <p>Konfigurasi data utama sekolah untuk sinkronisasi dokumen e-raport.</p>
+                </div>
+                <div class="action-buttons">
+                    <button class="btn btn-edit" id="btn-edit">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" /></svg>
+                        Edit Data
+                    </button>
+                    <button class="btn btn-cancel" id="btn-cancel">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
+                        Batal
+                    </button>
+                    <button class="btn btn-save" id="btn-save">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>
+                        Simpan Perubahan
+                    </button>
+                </div>
+            </div>
+
+            <div id="status-banner"></div>
+
+            <div class="card">
+                <form id="form-profil">
+                    <div class="section-title">1. Identitas Sekolah</div>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>Nama Instansi</label>
+                            <input type="text" id="nama_instansi" class="form-control" placeholder="Contoh: SD Negeri 1 Jember" disabled>
+                        </div>
+                        <div class="form-group">
+                            <label>Nomor Pokok Sekolah Nasional (NPSN)</label>
+                            <input type="number" id="npsn" class="form-control" placeholder="Contoh: 20512345" disabled>
+                        </div>
+                        <div class="form-group">
+                            <label>Status Sekolah</label>
+                            <select id="status_sekolah" class="form-control" disabled>
+                                <option value="">- Pilih Status -</option>
+                                <option value="NEGERI">NEGERI</option>
+                                <option value="SWASTA">SWASTA</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Bentuk Pendidikan</label>
+                            <select id="bentuk_pendidikan" class="form-control" disabled>
+                                <option value="">- Pilih Jenjang -</option>
+                                <option value="SD">SD</option>
+                                <option value="MI">MI</option>
+                                <option value="SMP">SMP</option>
+                                <option value="MTS">MTS</option>
+                                <option value="SMA">SMA</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Naungan</label>
+                            <input type="text" id="naungan" class="form-control" placeholder="Contoh: Kementerian Pendidikan / Kemenag" disabled>
+                        </div>
+                        <div class="form-group">
+                            <label>Nama Kepala Sekolah</label>
+                            <input type="text" id="kepala_sekolah" class="form-control" placeholder="Masukkan nama beserta gelar" disabled>
+                        </div>
+                    </div>
+
+                    <div class="section-title">2. Detail Lokasi</div>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>Alamat Jalan</label>
+                            <input type="text" id="alamat" class="form-control" placeholder="Contoh: Jl. Cempaka No. 13" disabled>
+                        </div>
+                        <div class="form-group">
+                            <label>Desa / Kelurahan</label>
+                            <input type="text" id="desa" class="form-control" placeholder="Contoh: Dukuh Dempok" disabled>
+                        </div>
+                        <div class="form-group">
+                            <label>Kecamatan / Kota (LN)</label>
+                            <input type="text" id="kecamatan" class="form-control" placeholder="Contoh: Kec. Wuluhan" disabled>
+                        </div>
+                        <div class="form-group">
+                            <label>Kabupaten / Kota</label>
+                            <input type="text" id="kabupaten" class="form-control" placeholder="Contoh: Kab. Jember" disabled>
+                        </div>
+                        <div class="form-group">
+                            <label>Provinsi</label>
+                            <input type="text" id="provinsi" class="form-control" placeholder="Contoh: Prov. Jawa Timur" disabled>
+                        </div>
+                    </div>
+
+                    <div class="section-title">3. Kontak & Media Sosial</div>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>Nomor Telepon / Kontak</label>
+                            <input type="text" id="kontak" class="form-control" placeholder="Contoh: 0331-123456" disabled>
+                        </div>
+                        <div class="form-group">
+                            <label>Website Resmi</label>
+                            <input type="url" id="website" class="form-control" placeholder="https://..." disabled>
+                        </div>
+                        <div class="form-group">
+                            <label>Instagram</label>
+                            <input type="text" id="ig" class="form-control" placeholder="@username" disabled>
+                        </div>
+                        <div class="form-group">
+                            <label>TikTok</label>
+                            <input type="text" id="tiktok" class="form-control" placeholder="@username" disabled>
+                        </div>
+                        <div class="form-group">
+                            <label>Facebook Page</label>
+                            <input type="text" id="facebook" class="form-control" placeholder="Nama Halaman Facebook" disabled>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
         import { getFirestore, doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-        // Konfigurasi Firebase Anda
+        // Konfigurasi Firebase
         const firebaseConfig = {
             apiKey: "AIzaSyCBXA1Atpm8LpDSdAr02OEvuADP2bUT9Gk",
             authDomain: "eraport-87687.firebaseapp.com",
@@ -198,23 +274,32 @@
 
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
+
+        // Referensi Dokumen: 'sekolah' -> 'profil_utama'
         const profilRef = doc(db, "sekolah", "profil_utama");
 
-        // Deklarasi Elemen
+        // UI Elements
         const formControls = document.querySelectorAll('.form-control');
         const btnEdit = document.getElementById('btn-edit');
         const btnSave = document.getElementById('btn-save');
         const btnCancel = document.getElementById('btn-cancel');
         const statusBanner = document.getElementById('status-banner');
 
-        // Fungsi Tarik Data dari Firestore
+        // Session Keamanan
+        if (sessionStorage.getItem("isLoggedIn") !== "true") {
+            window.location.href = "../index.html"; 
+        }
+        const storedRole = sessionStorage.getItem("role") || "Admin";
+        document.getElementById("user-display-role").textContent = storedRole.charAt(0).toUpperCase() + storedRole.slice(1);
+        document.getElementById("avatar-letter").textContent = storedRole.charAt(0).toUpperCase();
+
+        // 1. FUNGSI MENGAMBIL DATA DARI FIRESTORE
         async function fetchProfilData() {
             try {
                 const docSnap = await getDoc(profilRef);
                 if (docSnap.exists()) {
                     const data = docSnap.data();
                     
-                    // Identitas
                     document.getElementById('nama_instansi').value = data.nama_instansi || "";
                     document.getElementById('npsn').value = data.npsn || "";
                     document.getElementById('status_sekolah').value = data.status_sekolah || "";
@@ -222,14 +307,12 @@
                     document.getElementById('naungan').value = data.naungan || "";
                     document.getElementById('kepala_sekolah').value = data.kepala_sekolah || "";
                     
-                    // Lokasi
                     document.getElementById('alamat').value = data.alamat || "";
                     document.getElementById('desa').value = data.desa || "";
                     document.getElementById('kecamatan').value = data.kecamatan || "";
                     document.getElementById('kabupaten').value = data.kabupaten || "";
                     document.getElementById('provinsi').value = data.provinsi || "";
                     
-                    // Kontak & Medsos
                     document.getElementById('kontak').value = data.kontak || "";
                     document.getElementById('website').value = data.website || "";
                     document.getElementById('ig').value = data.ig || "";
@@ -237,11 +320,12 @@
                     document.getElementById('facebook').value = data.facebook || "";
                 }
             } catch (error) {
-                console.error("Gagal menarik data:", error);
+                console.error("Gagal mengambil data:", error);
+                showBanner("Gagal terhubung ke database. Cek koneksi Anda.", "error");
             }
         }
 
-        // Tampilkan Mode Edit
+        // 2. LOGIKA TOMBOL EDIT
         btnEdit.addEventListener('click', () => {
             formControls.forEach(input => input.removeAttribute('disabled'));
             btnEdit.style.display = "none";
@@ -250,22 +334,21 @@
             statusBanner.style.display = "none";
         });
 
-        // Batal & Kembalikan Data Lama
+        // 3. LOGIKA TOMBOL BATAL
         btnCancel.addEventListener('click', () => {
             formControls.forEach(input => input.setAttribute('disabled', 'true'));
             btnEdit.style.display = "flex";
             btnSave.style.display = "none";
             btnCancel.style.display = "none";
-            fetchProfilData();
+            fetchProfilData(); // Mengembalikan input ke data asli dari cloud
         });
 
-        // Simpan Data Baru ke Firestore
+        // 4. LOGIKA TOMBOL SIMPAN
         btnSave.addEventListener('click', async () => {
             btnSave.innerHTML = "Menyimpan...";
             btnSave.disabled = true;
 
             const profilData = {
-                // Identitas
                 nama_instansi: document.getElementById('nama_instansi').value.trim(),
                 npsn: document.getElementById('npsn').value.trim(),
                 status_sekolah: document.getElementById('status_sekolah').value.trim(),
@@ -273,50 +356,58 @@
                 naungan: document.getElementById('naungan').value.trim(),
                 kepala_sekolah: document.getElementById('kepala_sekolah').value.trim(),
                 
-                // Lokasi
                 alamat: document.getElementById('alamat').value.trim(),
                 desa: document.getElementById('desa').value.trim(),
                 kecamatan: document.getElementById('kecamatan').value.trim(),
                 kabupaten: document.getElementById('kabupaten').value.trim(),
                 provinsi: document.getElementById('provinsi').value.trim(),
                 
-                // Kontak & Medsos
                 kontak: document.getElementById('kontak').value.trim(),
                 website: document.getElementById('website').value.trim(),
                 ig: document.getElementById('ig').value.trim(),
                 tiktok: document.getElementById('tiktok').value.trim(),
                 facebook: document.getElementById('facebook').value.trim(),
                 
-                // Timestamp
                 updatedAt: new Date().toISOString()
             };
 
             try {
-                // Menggunakan merge: true memastikan kita tidak menghapus field lain di dokumen secara tidak sengaja
+                // Merge: true agar field lain (jika ada) di Firestore tidak tertimpa
                 await setDoc(profilRef, profilData, { merge: true });
-                
-                statusBanner.textContent = "Data profil berhasil disimpan!";
-                statusBanner.className = "status-success";
-                statusBanner.style.display = "block";
-                setTimeout(() => statusBanner.style.display = "none", 4000);
+                showBanner("Data profil sekolah berhasil diperbarui dan disimpan ke cloud!", "success");
                 
                 formControls.forEach(input => input.setAttribute('disabled', 'true'));
                 btnEdit.style.display = "flex";
                 btnSave.style.display = "none";
                 btnCancel.style.display = "none";
             } catch (error) {
-                console.error("Gagal menyimpan data:", error);
-                statusBanner.textContent = "Terjadi kesalahan saat menyimpan data.";
-                statusBanner.className = "status-error";
-                statusBanner.style.display = "block";
+                console.error("Gagal menyimpan:", error);
+                showBanner("Terjadi kesalahan saat menyimpan data ke Firestore.", "error");
             } finally {
                 btnSave.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg> Simpan Perubahan`;
                 btnSave.disabled = false;
             }
         });
 
-        // Tarik data saat pertama kali halaman dimuat (Iframe di-load)
+        // Tampilkan Banner
+        function showBanner(message, type) {
+            statusBanner.textContent = message;
+            statusBanner.className = type === "success" ? "status-success" : "status-error";
+            statusBanner.style.display = "block";
+            setTimeout(() => { statusBanner.style.display = "none"; }, 5000);
+        }
+
+        // Logout
+        document.getElementById("btn-logout").addEventListener("click", () => {
+            if(confirm("Keluar dari aplikasi?")) {
+                sessionStorage.clear();
+                window.location.href = "../index.html";
+            }
+        });
+
+        // Tarik data pertama kali saat halaman dimuat
         window.addEventListener('DOMContentLoaded', fetchProfilData);
+
     </script>
 </body>
 </html>
